@@ -2,8 +2,8 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="/public/css/login.css"/>
-<link rel="stylesheet" href="/public/css/index.css"/>
+<link rel="stylesheet" href="/MyStadium/public/css/login.css"/>
+<link rel="stylesheet" href="/MyStadium/public/css/index.css"/>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -21,7 +21,7 @@ body {
 
 <style>
 body {
-  background-image: url("../public/img/loginposter.jpg");  
+  background-image: url("/MyStadium/public/img/loginposter.jpg");  
 }  
 </style>
 
@@ -35,7 +35,7 @@ body {
 
 
 <div class="container">
-  <form action="../controller/connexion.php" method="POST">
+  <form action="/MyStadium/controller/connexion.php" method="POST">
     <div class="row">
       <h2 style="text-align:center">Login with Social Media or Manually</h2>
       <div class="vl">

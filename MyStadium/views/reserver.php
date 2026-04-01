@@ -3,7 +3,7 @@
   <head>
     <title>RESERVATION PAGE</title>
     <link href="/public/css/reserver.css" rel="stylesheet">
-    </script>
+
   </head>
   <body>
     <?php

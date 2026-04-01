@@ -2,7 +2,7 @@
             <h1>Mon espace</h1>
             <?php session_start();
             if(!isset($_SESSION["user"])){
-                header('Location: ../views/monespace.php'); 
+                header('Location: /'); 
             }else if(isset($_GET["deconnexion"])){
                 unset($_SESSION['user']);
                 header('Location: /'); 

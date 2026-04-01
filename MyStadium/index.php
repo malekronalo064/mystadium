@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="/public/css/index.css"/>
+    <link rel="stylesheet" href="/MyStadium/public/css/index.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" >
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap"/>
     <title>MyStadium</title>
@@ -19,7 +19,7 @@
 
       <style>
                 body {
-                    background-image: url('/public/img/backgroundaccueil.jpg');
+                    background-image: url('/MyStadium/public/img/backgroundaccueil.jpg');
                 }
         </style>
         
@@ -36,8 +36,8 @@
 
     <div class="buttonsMain">
 
-    <a href="/views/moncentre.php"><span>Mon Centre</span></a>
-    <a href="/views/reserver.php"><span>Réserver</span></a>
+    <a href="/MyStadium/views/moncentre.php"><span>Mon Centre</span></a>
+    <a href="/MyStadium/views/reserver.php"><span>Réserver</span></a>
         
     </div>
 

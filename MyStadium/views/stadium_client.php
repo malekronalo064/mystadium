@@ -7,13 +7,14 @@
                 $valide= !empty($_POST["login"]) &&
                          !empty($_POST["password"]);
                 if(!$valide){
-                    echo "<p style='color:red'>Tous les champs sont obligatoire!</p>";
+                    echo "<p style='color:red'>Tous les champs sont obligatoires!</p>";
                 }else{
-                    $sql = "select * from stadium_user where login='".$_POST['login']."'";
-                    $stmt = $pdo->query($sql, PDO::FETCH_ASSOC);
+                    $sql = "select * from stadium_user where login = :login";
+                    $stmt = $pdo->prepare($sql);
+
                     $stmt->execute();
-                    $result= $stmt->fetch();
-                    $goodPassword= password_verify($_POST['password'], $result["password"]);
+                    $result= $stmt->fetch(PDO::FETCH_ASSOC);
+                    if($goodPassword){
                     if(password_verify($_POST['password'], $result["password"])){
                         $_SESSION["user"]= $result;
                         header('Location: ../views/monespace.php');  
@@ -30,7 +31,7 @@
                 <input type="text" name="login" placeholder="login"/>
                 <input type="password" name="password" placeholder="password"/>
                 <input type="submit" value="Valider"/>
-            </form>
-            <p class="box-register">Déjà inscrit? 
+            <p class="box-register">Pas encore inscrit ? 
+  <a href="inscription.php">Inscrivez-vous ici</a></p>
   <a href="inscription.php">Connectez-vous ici</a></p>
         </div>

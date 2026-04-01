@@ -1,7 +1,7 @@
-<link rel="stylesheet" href="/public/css/inscription.css"/>
+<link rel="stylesheet" href="/MyStadium/public/css/inscription.css"/>
 <style>
         body {
-          background-image: url('../public/img/signupbackground.jpg');
+          background-image: url('/MyStadium/public/img/signupbackground.jpg');
         }
         </style>
 
@@ -10,7 +10,7 @@
         <h1>Inscription</h1>
         <hr>
             
-      <form method="POST" action="/controller/inscription.php" id="formInscription">
+      <form method="POST" action="/MyStadium/controller/inscription.php" id="formInscription">
         <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(isset($_SESSION['csrf_token'])?$_SESSION['csrf_token']:''); ?>">
                 <input type="text" name="lastname" placeholder="Nom"/>
                 <input type="text" name="firstname" placeholder="Prénom"/>

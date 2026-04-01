@@ -1,5 +1,5 @@
 <div id="topHead">
-    <a href="/index.php"><img src="/public/img/logo.png" alt="MyStadium" /></a>
+  <a href="/MyStadium/index.php"><img src="/MyStadium/public/img/logo.png" alt="MyStadium" /></a>
     <h1>My Stadium</h1>
 
     </div>
@@ -16,14 +16,14 @@
 
     <!-- barre menu -->
 <div class="menu">
-    <a href="/views/connexion.php" class="active">Login</a>
+    <a href="/MyStadium/views/connexion.php" class="active">Login</a>
 
 
     <!-- Navigation links -->
     <div id="myLinks">
-      <a href="/views/tournois.php">Tournois</a>
-      <a href="/views/store.php">Store</a>
-      <a href="/views/about.php">About</a>
+      <a href="/MyStadium/views/tournois.php">Tournois</a>
+      <a href="/MyStadium/views/store.php">Store</a>
+      <a href="/MyStadium/views/about.php">About</a>
     </div>
 
 

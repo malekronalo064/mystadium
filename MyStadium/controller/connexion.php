@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($username === '' || $password === '') {
         echo "<p style='color:red'>Tous les champs sont obligatoires!</p>";
     } else {
-        $stmt = $pdo->prepare('SELECT * FROM stadium_user WHERE login = :login LIMIT 1');
+        $stmt = $pdo->prepare('SELECT TOP 1 * FROM stadium_user WHERE login = :login');
         $stmt->execute([':login' => $username]);
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
 

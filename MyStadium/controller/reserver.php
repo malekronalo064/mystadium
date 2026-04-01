@@ -8,7 +8,7 @@ class Reservation {
   function __construct() {
     try {
       $this->pdo = new PDO(
-        "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET,
+        "sqlsrv:Server=" . DB_HOST . ";Database=" . DB_NAME . ";TrustServerCertificate=yes",
         DB_USER, DB_PASSWORD, [
           PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
           PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_NAMED
@@ -69,9 +69,8 @@ class Reservation {
 // (E) DATABASE SETTINGS 
 define("DB_HOST", "localhost");
 define("DB_NAME", "mystadium");
-define("DB_CHARSET", "utf8");
-define("DB_USER", "root");
-define("DB_PASSWORD", "");
+define("DB_USER", "root"); // adapte avec ton user SQL Server
+define("DB_PASSWORD", ""); // adapte avec ton mot de passe
 
 // (F) NEW RESERVATION OBJECT
 $_RSV = new Reservation();
