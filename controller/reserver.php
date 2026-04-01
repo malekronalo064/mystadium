@@ -8,7 +8,7 @@ class Reservation {
   function __construct() {
     try {
       $this->pdo = new PDO(
-        "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=" . DB_CHARSET,
+        "sqlsrv:Server=" . DB_HOST . ";Database=" . DB_NAME . ";TrustServerCertificate=1;",
         DB_USER, DB_PASSWORD, [
           PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
           PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_NAMED
@@ -29,8 +29,7 @@ class Reservation {
     $date_debut2 = $date_debut." ".$heure_debut.":00:00";
     $date_fin = $date_debut." ".(intval($heure_debut)+intval($duree_select)).":00:00";
     $this->stmt = $this->pdo->prepare(
-      "SELECT * FROM `terrain` WHERE id not in (select `id_1` from reservation where res_date_debut >= ? 
-      and res_date_fin <= ? ) "  );
+      "SELECT * FROM terrain WHERE id NOT IN (SELECT id_1 FROM reservation WHERE res_date_debut >= ? AND res_date_fin <= ?)"  );
     $this->stmt->execute([$date_debut2, $date_fin]);
     return $this->stmt->fetchAll();
   }
@@ -42,12 +41,11 @@ class Reservation {
     // (C1) DATABASE ENTRY (récupération des données d'utilisateur lors de sa réserevation)
     try {
       $this->stmt = $this->pdo->prepare(
-        "INSERT INTO `reservation` (`res_date_debut`,`res_date_fin`, `res_name`, `res_email`, `res_tel`, `res_prix`, `id_1`,`id`)
-         VALUES (?,?,?,?,?,10,?,?)");
-         
+        "INSERT INTO reservation (res_date_debut, res_date_fin, res_name, res_email, res_tel, res_prix, id_1, id)
+         VALUES (?, ?, ?, ?, ?, 10, ?, ?)"
+      );
       $date_debut2 = $date_debut." ".$heure_debut.":00:00";
       $date_fin = $date_debut." ".(intval($heure_debut)+intval($duree_select)).":00:00";
-      
       $this->stmt->execute([$date_debut2, $date_fin, $name, $email, $tel, $terrain, $_SESSION['user']['id'] ]);
     } catch (Exception $ex) {
       $this->error = $ex->getMessage();
@@ -92,12 +90,7 @@ class Reservation {
 }
 
 
-// (E) DATABASE SETTINGS 
-define("DB_HOST", "localhost");
-define("DB_NAME", "mystadium1");
-define("DB_CHARSET", "utf8");
-define("DB_USER", "root");
-define("DB_PASSWORD", "");
+// (E) DATABASE SETTINGS REMOVED (now in config.php)
 
 // (F) NEW RESERVATION OBJECT
 $_RSV = new Reservation();
