@@ -1,43 +1,50 @@
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
-}
-.content {
-    padding: 16px;
-    
-  }
-.content h1{
-    color: #ddd;
-}
-  
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 15px;
-    margin: 5px 0 22px 0;
-    display: inline-block;
-    border: none;
-    background: #f1f1f1;
-  }
-input[type=text]:focus, input[type=password]:focus {
-    background-color: #ddd;
-    outline: none;
-  }
-  
-hr {
-    border: 1px solid #f1f1f1;
-    margin-bottom: 25px;
-  }  
 
-.valider{
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 50%;
-  opacity: 0.9;
+/* Styles uniformisés pour formulaires, boutons, alertes */
+body {
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  box-sizing: border-box;
 }
-.valider :hover {
-    opacity:1;
-  }
+.form-group {
+  margin-bottom: 18px;
+}
+.input-field {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #b2d8b2;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f8fff8;
+  transition: border 0.2s;
+}
+.input-field:focus {
+  border: 1.5px solid #3bb54a;
+  outline: none;
+}
+.btn-main {
+  width: 100%;
+  padding: 12px 0;
+  background: linear-gradient(90deg, #1e5d2d 0%, #3bb54a 100%);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(30,93,45,0.08);
+  transition: background 0.2s;
+}
+.btn-main:hover {
+  background: linear-gradient(90deg, #3bb54a 0%, #1e5d2d 100%);
+}
+.alert {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 5px;
+  margin-bottom: 18px;
+  font-size: 0.98rem;
+}
+.alert-error {
+  background: #ffeaea;
+  color: #b30000;
+  border: 1px solid #ffb3b3;
+}

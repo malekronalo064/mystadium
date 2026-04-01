@@ -1,34 +1,46 @@
-#resForm {
-  max-width: 400px;
-  padding: 15px;
-  background: #f2f2f2;
-  border: 1px solid #aaa;
+
+/* Styles uniformisés pour formulaires, boutons, alertes */
+.form-group {
+  margin-bottom: 18px;
 }
-#resForm label, #resForm input, #resForm select {
-  display: block;
-  box-sizing: border-box;
+.input-field {
   width: 100%;
-  padding: 5px;
-  margin: 5px 0;
+  padding: 12px 14px;
+  border: 1px solid #b2d8b2;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #f8fff8;
+  transition: border 0.2s;
 }
-#resForm input[type="submit"] {
-  background: #5c76d4;
+.input-field:focus {
+  border: 1.5px solid #3bb54a;
+  outline: none;
+}
+.btn-main {
+  width: 100%;
+  padding: 12px 0;
+  background: linear-gradient(90deg, #1e5d2d 0%, #3bb54a 100%);
   color: #fff;
-  border: 0;
-  padding: 15px 0;
-  margin-top: 15px;
-  cursor: pointer;
-}
-div.ok, div.err { 
-  padding: 5px; 
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
   font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(30,93,45,0.08);
+  transition: background 0.2s;
 }
-div.ok { 
-  background: #9cffbb; 
-  border: 1px solid #1ca526;
+.btn-main:hover {
+  background: linear-gradient(90deg, #3bb54a 0%, #1e5d2d 100%);
 }
-div.err { 
-  background: #ffe0e0; 
-  border: 1px solid #bb1919;
+.alert {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 5px;
+  margin-bottom: 18px;
+  font-size: 0.98rem;
 }
-html, body { font-family: arial, sans-serif; }
+.alert-error {
+  background: #ffeaea;
+  color: #b30000;
+  border: 1px solid #ffb3b3;
+}
