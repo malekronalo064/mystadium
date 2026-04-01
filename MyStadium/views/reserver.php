@@ -1,60 +1,68 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>RESERVATION PAGE</title>
-    <link href="/public/css/reserver.css" rel="stylesheet">
-
-  </head>
-  <body>
-    <?php
-    // (A) PROCESS RESERVATION
-    if (isset($_POST["date"])) {
-      require "../controller/reserver.php";
-      if ($_RSV->save(
-        $_POST["date"], $_POST["slot"], $_POST["name"],
-        $_POST["email"], $_POST["tel"])) {
-        echo "<div class='ok'>Reservation faite</div>";
-      } else { echo "<div class='err'>".$_RSV->error."</div>"; }
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/MyStadium/public/css/login.css"/>
+  <link rel="stylesheet" href="/MyStadium/public/css/index.css"/>
+  <link rel="stylesheet" href="/MyStadium/public/css/reserver.css"/>
+  <title>Réserver un terrain — MyStadium</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e5d2d 0%, #3bb54a 100%);
+      min-height: 100vh;
     }
-    ?>
-
-    <!-- (B) RESERVATION FORM -->
-    <h1>RESERVATION</h1>
-    <form id="resForm" method="post" target="_self">
-      <label for="res_name">Name</label>
-      <input type="text" required name="name" value="Malek"/>
-
-      <label for="res_email">Email</label>
-      <input type="email" required name="email" value="Malek@123.com"/>
-
-      <label for="res_tel">Telephone Number</label>
-      <input type="text" required name="tel" value="123456789"/>
-
-      
-
+  </style>
+</head>
+<body>
+  <?php include(__DIR__ . "/header.php")?>
+  <div class="login-bg">
+    <div class="login-card" style="max-width: 420px;">
+      <h1 class="login-title">Réserver un terrain</h1>
       <?php
-
-
+      // (A) PROCESS RESERVATION
+      if (isset($_POST["date"])) {
+        require "../controller/reserver.php";
+        if ($_RSV->save(
+          $_POST["date"], $_POST["slot"], $_POST["name"],
+          $_POST["email"], $_POST["tel"])) {
+          echo "<div class='alert' style='background:#eaffea;color:#1e5d2d;border:1px solid #3bb54a;margin-bottom:18px;'>Réservation faite !</div>";
+        } else {
+          echo "<div class='alert alert-error'>".htmlspecialchars($_RSV->error)."</div>";
+        }
+      }
       // @TODO - MINIMUM DATE (TODAY)
-      // $mindate = date("Y-m-d", strtotime("+2 days"));
-
       $mindate = date("Y-m-d");
       ?>
-      <label>Reservation Date</label>
-      <input type="date" required id="res_date" name="date"
-             min="<?=$mindate?>">
-
-      <label>Choix de terrain</label>
-      <select name="slot">
-        <option value="TERRAIN-1">TERRAIN-1</option>
-        <option value="TERRAIN-2">TERRAIN-2</option>
-        <option value="TERRAIN-3">TERRAIN-3</option>
-        <option value="TERRAIN-4">TERRAIN-4</option>
-        <option value="TERRAIN-5">TERRAIN-5</option>
-        <option value="TERRAIN-6">TERRAIN-6</option>
-      </select>
-
-      <input type="submit" value="Submit"/>
-    </form>
-  </body>
+      <form id="resForm" method="post" class="login-form">
+        <div class="form-group">
+          <input type="text" required name="name" placeholder="Nom et prénom" class="input-field" />
+        </div>
+        <div class="form-group">
+          <input type="email" required name="email" placeholder="Email" class="input-field" />
+        </div>
+        <div class="form-group">
+          <input type="text" required name="tel" placeholder="Téléphone" class="input-field" />
+        </div>
+        <div class="form-group">
+          <label for="res_date" style="color:#1e5d2d;font-weight:bold;">Date de réservation</label>
+          <input type="date" required id="res_date" name="date" min="<?=$mindate?>" class="input-field" />
+        </div>
+        <div class="form-group">
+          <label for="slot" style="color:#1e5d2d;font-weight:bold;">Choix de terrain</label>
+          <select name="slot" id="slot" class="input-field">
+            <option value="TERRAIN-1">TERRAIN-1</option>
+            <option value="TERRAIN-2">TERRAIN-2</option>
+            <option value="TERRAIN-3">TERRAIN-3</option>
+            <option value="TERRAIN-4">TERRAIN-4</option>
+            <option value="TERRAIN-5">TERRAIN-5</option>
+            <option value="TERRAIN-6">TERRAIN-6</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-main">Valider la réservation</button>
+      </form>
+    </div>
+  </div>
+  <?php include(__DIR__ . "/footer.php")?>
+</body>
 </html>
