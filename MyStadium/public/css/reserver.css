@@ -1,3 +1,8 @@
+.alert-success {
+  background: #eaffea;
+  color: #1e5d2d;
+  border: 1px solid #3bb54a;
+}
 
 /* Styles uniformisés pour formulaires, boutons, alertes */
 .form-group {

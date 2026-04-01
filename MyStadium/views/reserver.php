@@ -26,7 +26,7 @@
         if ($_RSV->save(
           $_POST["date"], $_POST["slot"], $_POST["name"],
           $_POST["email"], $_POST["tel"])) {
-          echo "<div class='alert' style='background:#eaffea;color:#1e5d2d;border:1px solid #3bb54a;margin-bottom:18px;'>Réservation faite !</div>";
+          echo "<div class='alert alert-success'>Réservation faite !</div>";
         } else {
           echo "<div class='alert alert-error'>".htmlspecialchars($_RSV->error)."</div>";
         }

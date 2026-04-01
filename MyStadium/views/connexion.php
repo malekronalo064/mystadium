@@ -28,7 +28,8 @@
         exit;
       }
       if (isset($_GET['msg'])) {
-        echo '<div class="alert alert-error">' . htmlspecialchars($_GET['msg']) . '</div>';
+        $type = isset($_GET['type']) && $_GET['type'] === 'success' ? 'alert-success' : 'alert-error';
+        echo '<div class="alert ' . $type . '">' . htmlspecialchars($_GET['msg']) . '</div>';
       }
       ?>
       <form method="POST" action="/MyStadium/controller/connexion.php" class="login-form">

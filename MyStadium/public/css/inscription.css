@@ -1,3 +1,24 @@
+.alert-success {
+  background: #eaffea;
+  color: #1e5d2d;
+  border: 1px solid #3bb54a;
+}
+@media (max-width: 600px) {
+  .login-card {
+    padding: 24px 8px 20px 8px;
+    max-width: 98vw;
+  }
+  .login-title {
+    font-size: 1.3rem;
+  }
+  .btn-main {
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+  .register-link {
+    font-size: 0.95rem;
+  }
+}
 
 /* Styles uniformisés pour formulaires, boutons, alertes */
 body {
