@@ -1,0 +1,14 @@
+.content{
+    width: 100%;
+    position: absolute;
+    top: 52%;
+    transform: translateY(-50%);
+    text-align: center;
+    color: #fff;
+}
+
+.content h1{
+    font-size: 60px;
+    margin-top: 80px;
+    color: chartreuse ;
+}

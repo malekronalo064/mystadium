@@ -1,0 +1,52 @@
+
+/*footer*/
+#footer{
+     background-color: none;
+     color: white;
+     padding: 20px 0 10px 0;
+     text-align: center;
+     position: fixed;
+     left: 0;
+     bottom: -15px;
+     width: 100%;
+    }
+    footer.form{
+        margin: 0 auto;
+        max-width: 900px;
+    }
+
+    #copyrightEtIcons {
+        display: flex;
+        margin-bottom: 0px;
+        padding: 0 10%;
+    }
+    #copyright {
+        width: 50%;
+        text-align: centre ;
+        color: #FFFAE1;
+    }
+    #copyright b{
+        text-align:left ;
+    }
+    
+
+#icons{
+    color: #009688;
+    width: 900%;
+    text-align: right;
+}
+
+#icons a{
+    color: #009688;
+}
+
+#icons a {
+    display: inline-block;
+    padding:  15px;
+    font-size: 1.9em;
+
+}
+#icons a:hover {
+    transform: scale(1.5);
+    transition: 0.1s;
+}

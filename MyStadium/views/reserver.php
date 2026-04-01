@@ -21,6 +21,7 @@
       <h1 class="login-title">Réserver un terrain</h1>
       <?php
       // (A) PROCESS RESERVATION
+      $showSuccess = false;
       if (isset($_POST["date"])) {
         require "../controller/reserver.php";
         if ($_RSV->save(
@@ -28,14 +29,47 @@
           $_POST["email"], $_POST["tel"])) {
           require_once __DIR__ . '/../utils/mail.php';
           require_once __DIR__ . '/../utils/sms.php';
-          send_reservation_email($_POST["email"], $_POST["name"], $_POST["date"], $_POST["slot"]);
+          $mailError = $smsError = null;
+          $mailSent = send_reservation_email($_POST["email"], $_POST["name"], $_POST["date"], $_POST["slot"], $mailError);
+          $smsSent = true;
           if (!empty($_POST["tel"])) {
-            send_reservation_sms($_POST["tel"], $_POST["name"], $_POST["date"], $_POST["slot"]);
+            $smsSent = send_reservation_sms($_POST["tel"], $_POST["name"], $_POST["date"], $_POST["slot"], $smsError);
           }
-          echo "<div class='alert alert-success'>Réservation faite ! Un email et un SMS de confirmation ont été envoyés.</div>";
+          $showSuccess = true;
+          if ($mailSent && $smsSent) {
+            echo "<div class='alert alert-success'>Réservation faite ! Un email et un SMS de confirmation ont été envoyés.</div>";
+          } else {
+            echo "<div class='alert alert-warning'>Réservation faite, mais :<ul style='margin:0 0 0 18px;'>";
+            if (!$mailSent) echo "<li>Erreur d'envoi email : ".htmlspecialchars($mailError ?? '')."</li>";
+            if (!$smsSent) echo "<li>Erreur d'envoi SMS : ".htmlspecialchars($smsError ?? '')."</li>";
+            echo "</ul></div>";
+          }
         } else {
           echo "<div class='alert alert-error'>".htmlspecialchars($_RSV->error)."</div>";
         }
+      }
+      // (B) AUTO-RESERVATION APRÈS PAIEMENT
+      if (isset($_GET['paid']) && $_GET['paid'] == '1' && empty($_POST)) {
+        echo "<script>
+          if (localStorage.getItem('pendingReservation')) {
+            var data = JSON.parse(localStorage.getItem('pendingReservation'));
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.style.display = 'none';
+            for (var key in data) {
+              if (data.hasOwnProperty(key)) {
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = data[key];
+                form.appendChild(input);
+              }
+            }
+            document.body.appendChild(form);
+            localStorage.removeItem('pendingReservation');
+            form.submit();
+          }
+        </script>";
       }
       // @TODO - MINIMUM DATE (TODAY)
       $mindate = date("Y-m-d");

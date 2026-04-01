@@ -1,0 +1,70 @@
+#resForm {
+  padding: 8px;
+  background: rgba(0,0,0,0.30);
+  margin-left: 10%;
+width: 30%;
+  
+}
+
+input[type=text], input[type=email],input[type=date], label, select{
+  width: 87%;
+  padding: 8px;
+  border: none;
+  margin: 5px 0;
+  opacity: 0.75;
+  display: block;
+  font-size: 17px;
+  line-height: 20px;
+  text-decoration: none; 
+  margin-left: 10%;
+  box-sizing: border-box;
+  margin-top: 0px;
+
+}
+
+input[type=text]:hover, input[type=email]:hover ,input[type=date]:hover, select:hover{
+  opacity: 1;
+}
+
+
+#resForm input[type="submit"] {
+  background: #5c76d4;
+  color: #fff;
+  border: 0;
+  padding: 8px ;
+  cursor: pointer;
+  margin: 5px 0;
+  width: 60%;
+  display: block;
+  box-sizing: border-box;
+  font-size: 17px;
+  line-height: 20px;
+  margin-left: 30%;
+
+
+
+}
+label{
+  color: #fff;
+}
+
+
+#resForm input[type="submit"]:hover {
+  background: #324fb5;
+  color: #fff;
+  cursor: pointer;
+}
+
+div.ok, div.err { 
+  padding: 5px; 
+  font-weight: bold;
+}
+div.ok { 
+  background: #9cffbb; 
+  border: 1px solid #1ca526;
+}
+div.err { 
+  background: #bb1919; 
+  border: 1px solid #bb1919;
+}
+html, body { font-family: arial, sans-serif; }
