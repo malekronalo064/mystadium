@@ -1,120 +1,117 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>RESERVATION PAGE</title>
-    <link rel="stylesheet" href="/MyStadium/public/css/reserver.css">
-    <link rel="stylesheet" href="/MyStadium/public/css/header.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" >
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap"/>
-
-  </head>
-
-  <body>
-
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/MyStadium/public/css/login.css"/>
+  <link rel="stylesheet" href="/MyStadium/public/css/index.css"/>
+  <link rel="stylesheet" href="/MyStadium/public/css/reserver.css"/>
+  <title>Réserver un terrain — MyStadium</title>
   <style>
-body {    
-  background-image: linear-gradient(rgba(0,0,0,0.70), rgba(0,0,0,0.70)),url('/MyStadium/public/img/reservform.jpg');
-  background-size: cover;
-  background-position: center;  
-}  
-</style>
-    
-    <?php  include("../views/header.php") ?>
-
-      <?php
-      
-      if (isset($_SESSION['user'])){
-
-      } else {
-        header('Location: ../views/connexion.php');  
-      }
-    
-          // PROCESS RESERVATION
-    if (isset($_POST["date_debut"])) {
-      require "../controller/reserver.php";
-      $terrain = $_RSV->select_terrain($_POST["date_debut"],  $_POST["heure_debut"], $_POST["duree_select"]);
-
-      
-      if(empty($terrain)){
-
-       //cas pas de terrain disponible
-       
-       echo "<div class='err'> Pas de terrain disponible, veuillez changer d'horraire.</div>";
-       
-       //sinon dispo
-
-      }else{
-        
-        if ($_RSV->save(
-          $_POST["date_debut"], $_POST["duree_select"], $_POST["name"],
-          $_POST["email"], $_POST["tel"], $terrain[0]["id"], $_POST["heure_debut"])) 
-        {
-          echo "<div class='ok'>Reservation faite sur: ". $terrain[0]["nom_terrain"]."</div>";
-        } 
-        else { echo "<div class='err'>".$_RSV->error."</div>"; }
-      }
-      
+    body {
+      background: linear-gradient(135deg, #1e5d2d 0%, #3bb54a 100%);
+      min-height: 100vh;
     }
-    ?>
-
-    <!-- RESERVATION FORM -->
-    <h1 style="font-family: Abril fatface, sans-serif;
-    margin-left:10%; color:#fff">RESERVATION</h1>
-
-    <form id="resForm"  method="POST" target="_self">
-
-   <!-- method="POST" action="../controller/inscription.php"-->
-
-      <label for="res_name">Name</label>
-      <input type="text" required name="name" value="<?php echo $_SESSION['user']['firstname'];?>"/>
-
-
-      <label for="res_email">Email</label>
-      <input type="email" required name="email" value="<?php echo $_SESSION['user']['email'];?>" id="email"/>
-
-
-      <label for="res_tel">Telephone</label> 
-      <input type="text" required name="tel" value="<?php echo $_SESSION['user']['telephone'];?>" id="telephone"/>
-      
-
-      <input  type="hidden" required name="statut" value="inprogress"/>
-
-      
-
+  </style>
+</head>
+<body>
+  <?php include(__DIR__ . "/header.php")?>
+  <div class="login-bg">
+    <div class="login-card" style="max-width: 420px;">
+      <h1 class="login-title">Réserver un terrain</h1>
       <?php
-
-
-      // MINIMUM DATE (TODAY)
+      // (A) PROCESS RESERVATION
+      $showSuccess = false;
+      if (isset($_POST["date"])) {
+        require "../controller/reserver.php";
+        if ($_RSV->save(
+          $_POST["date"], $_POST["slot"], $_POST["name"],
+          $_POST["email"], $_POST["tel"])) {
+          require_once __DIR__ . '/../utils/mail.php';
+          require_once __DIR__ . '/../utils/sms.php';
+          $mailError = $smsError = null;
+          $mailSent = send_reservation_email($_POST["email"], $_POST["name"], $_POST["date"], $_POST["slot"], $mailError);
+          $smsSent = true;
+          if (!empty($_POST["tel"])) {
+            $smsSent = send_reservation_sms($_POST["tel"], $_POST["name"], $_POST["date"], $_POST["slot"], $smsError);
+          }
+          $showSuccess = true;
+          if ($mailSent && $smsSent) {
+            echo "<div class='alert alert-success'>Réservation faite ! Un email et un SMS de confirmation ont été envoyés.</div>";
+          } else {
+            echo "<div class='alert alert-warning'>Réservation faite, mais :<ul style='margin:0 0 0 18px;'>";
+            if (!$mailSent) echo "<li>Erreur d'envoi email : ".htmlspecialchars($mailError ?? '')."</li>";
+            if (!$smsSent) echo "<li>Erreur d'envoi SMS : ".htmlspecialchars($smsError ?? '')."</li>";
+            echo "</ul></div>";
+          }
+        } else {
+          echo "<div class='alert alert-error'>".htmlspecialchars($_RSV->error)."</div>";
+        }
+      }
+      // (B) AUTO-RESERVATION APRÈS PAIEMENT
+      if (isset($_GET['paid']) && $_GET['paid'] == '1' && empty($_POST)) {
+        echo "<script>
+          if (localStorage.getItem('pendingReservation')) {
+            var data = JSON.parse(localStorage.getItem('pendingReservation'));
+            var form = document.createElement('form');
+            form.method = 'POST';
+            form.style.display = 'none';
+            for (var key in data) {
+              if (data.hasOwnProperty(key)) {
+                var input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = key;
+                input.value = data[key];
+                form.appendChild(input);
+              }
+            }
+            document.body.appendChild(form);
+            localStorage.removeItem('pendingReservation');
+            form.submit();
+          }
+        </script>";
+      }
+      // @TODO - MINIMUM DATE (TODAY)
       $mindate = date("Y-m-d");
       ?>
-
-
-      <label>Date</label>
-      <input type="date" required id="res_date_debut" name="date_debut"
-             min="<?=$mindate?>">
-             
-      
-      <label>Heure :</label>
-      <select name='heure_debut' required id="res_heure_debut">
-      <?php for ($i=8; $i<18;$i++){
-        echo "<option value='$i'> $i h 00</option>";
-      }?>
-      </select>
-
-
-      <label>Durée</label>
-      
-
-      <select name='duree_select'  
-      min="<?=$mindate?>">
-      <?php for ($i=1; $i<3;$i++){
-        echo "<option value='$i'> $i h 00</option>";
-      }?>
-      </select>
-
-      <input type="submit" value="Valider"/>
-    </form>
-
-
-  </body>
+      <div id="calendar" style="margin-bottom:24px;"></div>
+      <form id="resForm" method="post" class="login-form">
+          <script src="/MyStadium/public/js/calendar.js"></script>
+        <div class="form-group">
+          <input type="text" required name="name" placeholder="Nom et prénom" class="input-field" />
+        </div>
+        <div class="form-group">
+          <input type="email" required name="email" placeholder="Email" class="input-field" />
+        </div>
+        <div class="form-group">
+          <input type="text" required name="tel" placeholder="Téléphone" class="input-field" />
+        </div>
+        <div class="form-group">
+          <label for="res_date" style="color:#1e5d2d;font-weight:bold;">Date de réservation</label>
+          <input type="date" required id="res_date" name="date" min="<?=$mindate?>" class="input-field" />
+        </div>
+        <div class="form-group">
+          <label for="slot" style="color:#1e5d2d;font-weight:bold;">Choix de terrain</label>
+          <select name="slot" id="slot" class="input-field">
+            <option value="TERRAIN-1">TERRAIN-1</option>
+            <option value="TERRAIN-2">TERRAIN-2</option>
+            <option value="TERRAIN-3">TERRAIN-3</option>
+            <option value="TERRAIN-4">TERRAIN-4</option>
+            <option value="TERRAIN-5">TERRAIN-5</option>
+            <option value="TERRAIN-6">TERRAIN-6</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="amount" style="color:#1e5d2d;font-weight:bold;">Montant (€)</label>
+          <input type="number" id="amount" name="amount" class="input-field" min="1" value="10" required />
+        </div>
+        <button type="submit" class="btn-main">Valider la réservation</button>
+        <button id="pay-btn" class="btn-main" style="margin-top:10px;background:#3bb54a;" type="button">Payer en ligne</button>
+      </form>
+      <script src="https://js.stripe.com/v3/"></script>
+      <script src="/MyStadium/public/js/payment.js"></script>
+    </div>
+  </div>
+  <?php include(__DIR__ . "/footer.php")?>
+</body>
 </html>
