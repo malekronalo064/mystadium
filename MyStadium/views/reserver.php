@@ -26,7 +26,13 @@
         if ($_RSV->save(
           $_POST["date"], $_POST["slot"], $_POST["name"],
           $_POST["email"], $_POST["tel"])) {
-          echo "<div class='alert alert-success'>Réservation faite !</div>";
+          require_once __DIR__ . '/../utils/mail.php';
+          require_once __DIR__ . '/../utils/sms.php';
+          send_reservation_email($_POST["email"], $_POST["name"], $_POST["date"], $_POST["slot"]);
+          if (!empty($_POST["tel"])) {
+            send_reservation_sms($_POST["tel"], $_POST["name"], $_POST["date"], $_POST["slot"]);
+          }
+          echo "<div class='alert alert-success'>Réservation faite ! Un email et un SMS de confirmation ont été envoyés.</div>";
         } else {
           echo "<div class='alert alert-error'>".htmlspecialchars($_RSV->error)."</div>";
         }
@@ -59,8 +65,15 @@
             <option value="TERRAIN-6">TERRAIN-6</option>
           </select>
         </div>
+        <div class="form-group">
+          <label for="amount" style="color:#1e5d2d;font-weight:bold;">Montant (€)</label>
+          <input type="number" id="amount" name="amount" class="input-field" min="1" value="10" required />
+        </div>
         <button type="submit" class="btn-main">Valider la réservation</button>
+        <button id="pay-btn" class="btn-main" style="margin-top:10px;background:#3bb54a;" type="button">Payer en ligne</button>
       </form>
+      <script src="https://js.stripe.com/v3/"></script>
+      <script src="/MyStadium/public/js/payment.js"></script>
     </div>
   </div>
   <?php include(__DIR__ . "/footer.php")?>
