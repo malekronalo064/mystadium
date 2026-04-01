@@ -1,4 +1,3 @@
-<?php
 // public/js/payment.js
 // Script pour lancer le paiement Stripe Checkout
 
@@ -9,6 +8,8 @@ document.addEventListener('DOMContentLoaded', function () {
       e.preventDefault();
       var email = document.querySelector('input[name="email"]').value;
       var amount = document.getElementById('amount').value || 10; // Montant par défaut
+      // Récupérer la clé publique Stripe depuis une balise meta ou variable globale
+      var stripeKey = window.STRIPE_PUBLISHABLE_KEY || 'pk_test_votre_cle_publique';
       fetch('/MyStadium/controller/payment.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -17,7 +18,11 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(function (res) { return res.json(); })
         .then(function (data) {
           if (data.id) {
-            var stripe = Stripe('pk_test_votre_cle_publique'); // Remplacer par la vraie clé
+            if (typeof Stripe === 'undefined') {
+              alert('Stripe.js n\'est pas chargé.');
+              return;
+            }
+            var stripe = Stripe(stripeKey);
             stripe.redirectToCheckout({ sessionId: data.id });
           } else {
             alert('Erreur paiement : ' + (data.error || 'Inconnue'));

@@ -11,6 +11,9 @@
     <a href="/MyStadium/views/tournois.php" class="nav-link">Tournois</a>
     <a href="/MyStadium/views/store.php" class="nav-link">Store</a>
     <a href="/MyStadium/views/about.php" class="nav-link">About</a>
+    <?php if (isset($_SESSION['user']) && ($_SESSION['user']['role'] ?? '') === 'admin'): ?>
+      <a href="/MyStadium/views/admin.php" class="nav-link">Admin</a>
+    <?php endif; ?>
   </nav>
   <button class="menu-toggle" aria-label="Ouvrir le menu" onclick="toggleMenu()">
     <i class="fa fa-bars"></i>

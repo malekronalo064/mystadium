@@ -40,7 +40,9 @@
       // @TODO - MINIMUM DATE (TODAY)
       $mindate = date("Y-m-d");
       ?>
+      <div id="calendar" style="margin-bottom:24px;"></div>
       <form id="resForm" method="post" class="login-form">
+          <script src="/MyStadium/public/js/calendar.js"></script>
         <div class="form-group">
           <input type="text" required name="name" placeholder="Nom et prénom" class="input-field" />
         </div>
