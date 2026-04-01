@@ -1,53 +1,114 @@
 @import url('https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;700&display=swap');
 
-/*header*/
-#topHead{
-    display: flex;
-}
-#topHead img{
-    
-    width: 120px; margin: 5px;
-}
-#topHead h1 {
-    text-align: center;
-    flex: 1;
-    color: rgb(35, 199, 20);
-    font-family: 'Ms Madi', cursive;
-    font-size: 4em;
-
+body {
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  margin: 0;
+  background: #f8fff8;
+  color: #222;
 }
 
-/* Barre menu*/
-
-/* Style the navigation menu */
-.menu {
-    overflow: hidden;
-    background-color: #333;
-    position: relative;
+/* HEADER */
+.main-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 32px;
+  background: linear-gradient(90deg, #1e5d2d 0%, #3bb54a 100%);
+  min-height: 70px;
+  box-shadow: 0 2px 8px rgba(30,93,45,0.08);
+}
+.header-left {
+  display: flex;
+  align-items: center;
+}
+.logo-link {
+  display: flex;
+  align-items: center;
+}
+.logo-img {
+  width: 60px;
+  height: auto;
+  margin-right: 16px;
+}
+.site-title {
+  color: #fff;
+  font-family: 'Ms Madi', cursive;
+  font-size: 2.5em;
+  letter-spacing: 1px;
+  margin: 0;
+}
+.main-nav {
+  display: flex;
+  gap: 24px;
+}
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 5px;
+  transition: background 0.2s;
+}
+.nav-link:hover {
+  background: rgba(255,255,255,0.12);
+}
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2em;
+  cursor: pointer;
+}
+@media (max-width: 800px) {
+  .main-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 12px;
   }
-  
-  /* Hide the links inside the navigation menu (except for logo/home) */
-  .menu #myLinks {
+  .main-nav {
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
     display: none;
   }
-  
-  /* Style navigation menu links */
-  .menu a {
-    color: white;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    display: block;
+  .main-nav.nav-open {
+    display: flex;
   }
-  
-  /* Style the hamburger menu */
-  .menu a.icon {
-    background: black;
+  .menu-toggle {
     display: block;
-    position: absolute;
-    right: 0;
-    top: 0;
+    align-self: flex-end;
   }
+}
+
+/* FOOTER */
+.main-footer {
+  background: #1e5d2d;
+  color: #fff;
+  padding: 18px 0;
+  text-align: center;
+  margin-top: 40px;
+}
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.footer-icons a {
+  color: #fff;
+  margin: 0 8px;
+  font-size: 1.3em;
+  transition: color 0.2s;
+}
+.footer-icons a:hover {
+  color: #3bb54a;
+}
+.footer-copyright {
+  font-size: 1em;
+}
   
   /* Add a grey background color on mouse-over */
   .menu a:hover {
