@@ -4,26 +4,25 @@
             session_start();
             require_once("../bdd/config.php"); 
             if(isset($_POST["login"])){
-                $valide= !empty($_POST["login"]) &&
-                         !empty($_POST["password"]);
+                $valide = !empty($_POST["login"]) && !empty($_POST["password"]);
                 if(!$valide){
                     echo "<p style='color:red'>Tous les champs sont obligatoires!</p>";
-                }else{
-                    $sql = "select * from stadium_user where login = :login";
+                } else {
+                    $sql = "SELECT * FROM stadium_user WHERE login = :login";
                     $stmt = $pdo->prepare($sql);
-
-                    $stmt->execute();
-                    $result= $stmt->fetch(PDO::FETCH_ASSOC);
-                    if($goodPassword){
-                    if(password_verify($_POST['password'], $result["password"])){
-                        $_SESSION["user"]= $result;
-                        header('Location: ../views/monespace.php');  
-                    }else{
-                        echo "<p>Identifiants incorrect!</p>";
+                    $stmt->execute([':login' => $_POST['login']]);
+                    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+                    if($result && password_verify($_POST['password'], $result["password"])){
+                        $_SESSION["user"] = $result;
+                        header('Location: ../views/monespace.php');
+                        exit;
+                    } else {
+                        echo "<p style='color:red'>Identifiants incorrects !</p>";
                     }
                 }
-            }else if(isset($_SESSION["user"])){
-                header('Location: ../views/monespace.php'); 
+            } else if(isset($_SESSION["user"])){
+                header('Location: ../views/monespace.php');
+                exit;
             }
             
             ?>
