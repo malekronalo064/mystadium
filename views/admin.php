@@ -22,42 +22,44 @@ $users = $stmt2->fetchAll(PDO::FETCH_ASSOC);
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/MyStadium/public/css/index.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Admin — MyStadium</title>
-  <style>body { font-family: 'Roboto', 'Segoe UI', Arial, sans-serif; }</style>
 </head>
 <body>
 <?php include(__DIR__ . "/header.php")?>
-<div class="login-bg">
-  <div class="login-card" style="max-width:900px;width:100%;">
-    <h1 class="login-title">Espace Administration</h1>
-    <h2>Réservations</h2>
-    <table style="width:100%;margin-bottom:24px;">
-      <tr><th>Date</th><th>Terrain</th><th>Nom</th><th>Email</th><th>Téléphone</th></tr>
-      <?php foreach($reservations as $r): ?>
-      <tr>
-        <td><?=htmlspecialchars($r['res_date'])?></td>
-        <td><?=htmlspecialchars($r['res_slot'])?></td>
-        <td><?=htmlspecialchars($r['res_name'])?></td>
-        <td><?=htmlspecialchars($r['res_email'])?></td>
-        <td><?=htmlspecialchars($r['res_tel'])?></td>
-      </tr>
-      <?php endforeach; ?>
-    </table>
-    <h2>Utilisateurs</h2>
-    <table style="width:100%;">
-      <tr><th>Login</th><th>Nom</th><th>Prénom</th><th>Email</th><th>Rôle</th></tr>
-      <?php foreach($users as $u): ?>
-      <tr>
-        <td><?=htmlspecialchars($u['login'])?></td>
-        <td><?=htmlspecialchars($u['lastname'])?></td>
-        <td><?=htmlspecialchars($u['firstname'])?></td>
-        <td><?=htmlspecialchars($u['email'])?></td>
-        <td><?=htmlspecialchars($u['role'] ?? 'user')?></td>
-      </tr>
-      <?php endforeach; ?>
-    </table>
-  </div>
+<div class="login-bg" style="background: linear-gradient(135deg, #1e5d2d 0%, #3bb54a 100%); min-height: 100vh; display: flex; flex-direction: column; align-items: center;">
+  <section class="card" style="max-width:900px;width:100%;margin:48px 0;text-align:center;background:rgba(255,255,255,0.97);box-shadow:0 8px 32px #1e5d2d22;">
+    <h1 class="login-title" style="font-size:2.2em;color:#1e5d2d;font-family:'Ms Madi',cursive;margin-bottom:18px;">Espace Administration</h1>
+    <h2 style="color:#1e5d2d;font-size:1.3em;margin-bottom:12px;">Réservations</h2>
+    <table id="admin-reservations-table" style="width:100%;margin-bottom:24px;"></table>
+    <h2 style="color:#1e5d2d;font-size:1.3em;margin-bottom:12px;">Utilisateurs</h2>
+    <table id="admin-users-table" style="width:100%;"></table>
+    <script src="/MyStadium/public/js/app.js"></script>
+    <script>
+    async function chargerAdmin() {
+      const res = await fetch('/MyStadium/api/admin.php', {credentials:'same-origin'});
+      const data = await res.json();
+      if(data.success) {
+        // Réservations
+        const rTable = document.getElementById('admin-reservations-table');
+        rTable.innerHTML = '<tr><th>Date</th><th>Terrain</th><th>Nom</th><th>Email</th><th>Téléphone</th></tr>';
+        data.reservations.forEach(r => {
+          rTable.innerHTML += `<tr><td>${r.res_date}</td><td>${r.terrain_id||r.res_slot||''}</td><td>${r.res_name||''}</td><td>${r.res_email||''}</td><td>${r.res_tel||''}</td></tr>`;
+        });
+        // Utilisateurs
+        const uTable = document.getElementById('admin-users-table');
+        uTable.innerHTML = '<tr><th>Login</th><th>Nom</th><th>Prénom</th><th>Email</th><th>Rôle</th></tr>';
+        data.users.forEach(u => {
+          uTable.innerHTML += `<tr><td>${u.login||''}</td><td>${u.lastname||''}</td><td>${u.firstname||''}</td><td>${u.email||''}</td><td>${u.role||'user'}</td></tr>`;
+        });
+      } else {
+        alert('Accès refusé');
+        window.location.href = '/MyStadium/views/connexion.php';
+      }
+    }
+    chargerAdmin();
+    </script>
+  </section>
 </div>
 <?php include(__DIR__ . "/footer.php")?>
 </body>

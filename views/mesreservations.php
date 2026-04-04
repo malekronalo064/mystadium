@@ -1,70 +1,22 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="/MyStadium/public/css/index.css"/>
-    <link rel="stylesheet" href="/MyStadium/public/css/mesreservations.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" >
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-
-    <title>MyStadium</title>
-    <style>body { font-family: 'Roboto', 'Segoe UI', Arial, sans-serif; }</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/MyStadium/public/css/index.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Mes réservations — MyStadium</title>
 </head>
-
-    <body>
-    <!-- Style global géré par index.css -->
-    
-    <?php include(__DIR__ . "/header.php"); ?>
-
-
-      <?php
-
-
-include("../bdd/config.php");
-
-if(isset($_SESSION['user'])){
-     
-      $query = 'SELECT * from reservation';
-
-      if($_SESSION['user']=='utilisateur'){
-          $query = 'SELECT * from reservation where res_user='. $_SESSION['user']['id'];
-      }
-      $results = $pdo->query($query);
-      $result = $results->fetchAll();
-}    
-       ?>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Date debut </th>
-    <th>Date fin </th>
-    <th>Terrain</th>
-    <th>Prix / €</th>
-  </tr>
-
-  <?php if (!empty($result) && is_array($result)) {
-    foreach($result as $key => $val){?>
-  <tr>
-    <td><?php echo $val['res_name'] ?></td>
-    <td><?php echo $val['res_date_debut'] ?></td>
-    <td><?php echo $val['res_date_fin'] ?></td>
-    <td><?php echo $val['id_1'] ?></td>
-    <td><?php echo $val['res_prix'] ?></td>
-
-  </tr>
-
-
-    <?php }
-  } else {
-    echo "<tr><td colspan='5' style='text-align:center;color:#c62828;'>Aucune réservation trouvée.</td></tr>";
-  }
-  ?>
-
-</table>
-
-
-  <?php include($_SERVER['DOCUMENT_ROOT'] . "/MyStadium/views/footer.php"); ?>
+<body>
+<?php include(__DIR__ . "/header.php"); ?>
+<div class="login-bg" style="background: linear-gradient(135deg, #1e5d2d 0%, #3bb54a 100%); min-height: 100vh; display: flex; flex-direction: column; align-items: center;">
+  <section class="card" style="max-width: 900px; width: 100%; margin: 48px 0; text-align: center; background: rgba(255,255,255,0.97); box-shadow:0 8px 32px #1e5d2d22;">
+    <h1 class="login-title" style="font-size:2.2em; color:#1e5d2d; font-family:'Ms Madi',cursive; margin-bottom: 18px;">Mes réservations</h1>
+    <table id="mes-reservations-table" style="width:100%;margin-bottom:24px;"></table>
+    <script src="/MyStadium/public/js/app.js"></script>
+    <script>chargerMesReservations();</script>
+  </section>
+</div>
+<?php include(__DIR__ . "/footer.php"); ?>
 </body>
 </html>

@@ -1,28 +1,29 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="/MyStadium/public/css/index.css"/>
-	<title>Expérience — MyStadium</title>
-	<style>body{font-family:'Segoe UI','Roboto',Arial,sans-serif;}</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/MyStadium/public/css/index.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <title>Expérience — MyStadium</title>
 </head>
 <body>
-	<?php include(__DIR__ . "/header.php")?>
-	<div class="login-bg">
-		<div class="login-card" style="max-width:700px;width:100%;">
-			<h1 class="login-title">Expérience utilisateur</h1>
-			<h2>Témoignages</h2>
-			<blockquote>“Super facile de réserver, équipe sympa, je recommande !” — Karim</blockquote>
-			<blockquote>“Le calendrier interactif est top, plus de galère pour trouver un créneau.” — Julie</blockquote>
-			<h2>FAQ</h2>
-			<ul>
-				<li><strong>Comment réserver ?</strong> Créez un compte, connectez-vous et choisissez votre créneau !</li>
-				<li><strong>Puis-je annuler ?</strong> Oui, depuis votre espace personnel.</li>
-				<li><strong>Quels moyens de paiement ?</strong> CB, PayPal, espèces sur place.</li>
-			</ul>
-		</div>
-	</div>
+<?php include(__DIR__ . "/header.php")?>
+<div class="login-bg" style="background: linear-gradient(135deg, #1e5d2d 0%, #3bb54a 100%); min-height: 100vh; display: flex; flex-direction: column; align-items: center;">
+  <section class="card" style="max-width: 700px; width: 100%; margin: 48px 0; text-align: center; background: rgba(255,255,255,0.97); box-shadow:0 8px 32px #1e5d2d22;">
+    <h1 class="login-title" style="font-size:2.2em; color:#1e5d2d; font-family:'Ms Madi',cursive; margin-bottom: 18px;">Expérience utilisateur</h1>
+    <h2 style="color:#1e5d2d;font-size:1.3em;margin-bottom:12px;">Témoignages</h2>
+    <blockquote style="background:#f5f5f5;border-radius:12px;padding:18px 24px;margin-bottom:12px;box-shadow:0 2px 8px #3bb54a22;">“Super facile de réserver, équipe sympa, je recommande !” — Karim</blockquote>
+    <blockquote style="background:#f5f5f5;border-radius:12px;padding:18px 24px;margin-bottom:12px;box-shadow:0 2px 8px #3bb54a22;">“Le calendrier interactif est top, plus de galère pour trouver un créneau.” — Julie</blockquote>
+    <h2 style="color:#1e5d2d;font-size:1.3em;margin-bottom:12px;">FAQ</h2>
+    <ul style="list-style:none;padding:0;margin:0 auto 18px auto;max-width:600px;display:flex;flex-direction:column;gap:12px;align-items:center;">
+      <li style="background:#f5f5f5;border-radius:12px;padding:18px 24px;min-width:220px;max-width:420px;box-shadow:0 2px 8px #3bb54a22;"><strong>Comment réserver ?</strong> Créez un compte, connectez-vous et choisissez votre créneau !</li>
+      <li style="background:#f5f5f5;border-radius:12px;padding:18px 24px;min-width:220px;max-width:420px;box-shadow:0 2px 8px #3bb54a22;"><strong>Puis-je annuler ?</strong> Oui, depuis votre espace personnel.</li>
+      <li style="background:#f5f5f5;border-radius:12px;padding:18px 24px;min-width:220px;max-width:420px;box-shadow:0 2px 8px #3bb54a22;"><strong>Quels moyens de paiement ?</strong> CB, PayPal, espèces sur place.</li>
+    </ul>
+  </section>
+</div>
+<?php include(__DIR__ . "/footer.php")?>
 </body>
 </html>
 <!DOCTYPE html>

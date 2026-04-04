@@ -1,7 +1,15 @@
 <?php
 session_start();
-unset($_SESSION["id"]);
-unset($_SESSION["user"]);
+// Vide toutes les variables de session
+$_SESSION = array();
+// Supprime le cookie de session si besoin
+if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000,
+        $params["path"], $params["domain"],
+        $params["secure"], $params["httponly"]
+    );
+}
 session_destroy();
 header("Location: /MyStadium/views/connexion.php");
 exit;
