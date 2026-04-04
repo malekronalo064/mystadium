@@ -2,8 +2,10 @@
 // views/admin.php
 session_start();
 if (!isset($_SESSION['user']) || ($_SESSION['user']['role'] ?? '') !== 'admin') {
-    header('Location: /MyStadium/index.php');
-    exit;
+  unset($_SESSION['user']);
+  session_destroy();
+  header('Location: /MyStadium/views/connexion.php');
+  exit;
 }
 require_once __DIR__ . '/../bdd/config.php';
 
@@ -20,7 +22,9 @@ $users = $stmt2->fetchAll(PDO::FETCH_ASSOC);
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/MyStadium/public/css/index.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <title>Admin — MyStadium</title>
+  <style>body { font-family: 'Roboto', 'Segoe UI', Arial, sans-serif; }</style>
 </head>
 <body>
 <?php include(__DIR__ . "/header.php")?>

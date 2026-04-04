@@ -1,5 +1,30 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Spécifique à la page Mon Centre */
+.login-bg {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+}
+.card {
+    background: rgba(255,255,255,0.97);
+    border-radius: 22px;
+    box-shadow: 0 8px 32px rgba(30,93,45,0.18);
+    padding: 48px 36px 36px 36px;
+    max-width: 700px;
+    width: 100%;
+    margin: 36px auto;
+    transition: box-shadow 0.2s, transform 0.2s;
+    border: 1.5px solid #e0f2e9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.login-title {
+    color: #1e5d2d;
+    font-size: 2em;
+    margin-bottom: 18px;
+    font-family: 'Ms Madi', cursive;
+    font-weight: 700;
+    letter-spacing: 1px;
 }

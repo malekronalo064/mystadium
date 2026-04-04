@@ -6,46 +6,65 @@
   <link rel="stylesheet" href="/MyStadium/public/css/login.css"/>
   <link rel="stylesheet" href="/MyStadium/public/css/index.css"/>
   <link rel="stylesheet" href="/MyStadium/public/css/reserver.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <title>Réserver un terrain — MyStadium</title>
-  <style>
-    body {
-      background: linear-gradient(135deg, #1e5d2d 0%, #3bb54a 100%);
-      min-height: 100vh;
-    }
-  </style>
+  <!-- Style global géré par index.css -->
 </head>
 <body>
   <?php include(__DIR__ . "/header.php")?>
-  <div class="login-bg">
-    <div class="login-card" style="max-width: 420px;">
-      <h1 class="login-title">Réserver un terrain</h1>
-      <?php
-      // (A) PROCESS RESERVATION
-      $showSuccess = false;
-      if (isset($_POST["date"])) {
-        require "../controller/reserver.php";
-        if ($_RSV->save(
-          $_POST["date"], $_POST["slot"], $_POST["name"],
-          $_POST["email"], $_POST["tel"])) {
-          require_once __DIR__ . '/../utils/mail.php';
-          require_once __DIR__ . '/../utils/sms.php';
-          $mailError = $smsError = null;
-          $mailSent = send_reservation_email($_POST["email"], $_POST["name"], $_POST["date"], $_POST["slot"], $mailError);
-          $smsSent = true;
-          if (!empty($_POST["tel"])) {
-            $smsSent = send_reservation_sms($_POST["tel"], $_POST["name"], $_POST["date"], $_POST["slot"], $smsError);
-          }
-          $showSuccess = true;
-          if ($mailSent && $smsSent) {
-            echo "<div class='alert alert-success'>Réservation faite ! Un email et un SMS de confirmation ont été envoyés.</div>";
-          } else {
-            echo "<div class='alert alert-warning'>Réservation faite, mais :<ul style='margin:0 0 0 18px;'>";
-            if (!$mailSent) echo "<li>Erreur d'envoi email : ".htmlspecialchars($mailError ?? '')."</li>";
-            if (!$smsSent) echo "<li>Erreur d'envoi SMS : ".htmlspecialchars($smsError ?? '')."</li>";
-            echo "</ul></div>";
+  <div class="login-bg" style="background: linear-gradient(135deg, #1e5d2d 0%, #3bb54a 100%), url('/MyStadium/public/img/reservform.jpg') center/cover no-repeat; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <div class="card" style="max-width: 440px; width: 100%; margin: 48px 0; text-align: center; background: rgba(255,255,255,0.97);">
+      <h1 class="login-title" style="font-size:2em; color:#1e5d2d; font-family:'Ms Madi',cursive; margin-bottom: 18px;">Réserver un terrain</h1>
+      <form id="form-reservation" onsubmit="event.preventDefault(); reserver();">
+        <div class="form-group">
+          <label for="terrain">Terrain :</label>
+          <select id="terrain" name="terrain" class="input-field"></select>
+        </div>
+        <div class="form-group">
+          <label for="date">Date :</label>
+          <input type="date" id="date" name="date" class="input-field" required />
+        </div>
+        <div class="form-group">
+          <label for="slot">Créneau :</label>
+          <select id="slot" name="slot" class="input-field">
+            <option value="08:00-09:00">08:00-09:00</option>
+            <option value="09:00-10:00">09:00-10:00</option>
+            <option value="10:00-11:00">10:00-11:00</option>
+            <option value="11:00-12:00">11:00-12:00</option>
+            <option value="12:00-13:00">12:00-13:00</option>
+            <option value="13:00-14:00">13:00-14:00</option>
+            <option value="14:00-15:00">14:00-15:00</option>
+            <option value="15:00-16:00">15:00-16:00</option>
+            <option value="16:00-17:00">16:00-17:00</option>
+            <option value="17:00-18:00">17:00-18:00</option>
+            <option value="18:00-19:00">18:00-19:00</option>
+            <option value="19:00-20:00">19:00-20:00</option>
+            <option value="20:00-21:00">20:00-21:00</option>
+          </select>
+        </div>
+        <button class="btn-main" type="submit">Réserver</button>
+      </form>
+      <script src="/MyStadium/public/js/app.js"></script>
+      <script>
+      // Remplir la liste des terrains dynamiquement
+      fetch('/MyStadium/api/terrains.php').then(r=>r.json()).then(terrains=>{
+        const select = document.getElementById('terrain');
+        terrains.forEach(t=>{
+          const opt = document.createElement('option');
+          opt.value = t.id; opt.textContent = t.name;
+          select.appendChild(opt);
+        });
+      });
+      </script>
+            if (!empty($_POST)) {
+              echo "<div class='alert alert-success'>Votre réservation a bien été prise en compte.</div>";
+              echo "<script>setTimeout(function(){ window.location.href='/MyStadium/views/mesreservations.php'; }, 2200);</script>";
+            }
           }
         } else {
-          echo "<div class='alert alert-error'>".htmlspecialchars($_RSV->error)."</div>";
+          if (!empty($_POST)) {
+            echo "<div class='alert alert-error'>".htmlspecialchars($_RSV->error)."</div>";
+          }
         }
       }
       // (B) AUTO-RESERVATION APRÈS PAIEMENT

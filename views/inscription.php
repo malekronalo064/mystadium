@@ -1,3 +1,8 @@
+<?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -6,47 +11,91 @@
   <link rel="stylesheet" href="/MyStadium/public/css/login.css"/>
   <link rel="stylesheet" href="/MyStadium/public/css/index.css"/>
   <link rel="stylesheet" href="/MyStadium/public/css/inscription.css"/>
+  <!-- Correct Google Fonts link for Segoe UI (actually, Segoe UI is a system font, but for web, use a similar font like 'Segoe UI', 'Roboto', or 'Open Sans') -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <title>Inscription — MyStadium</title>
-  <style>
-    body {
-      background-image: url('/MyStadium/public/img/signupbackground.jpg');
-      background-size: cover;
-      background-position: center;
-      min-height: 100vh;
-    }
-  </style>
+  <!-- Style global géré par index.css -->
 </head>
 <body>
   <?php include(__DIR__ . "/header.php")?>
-  <div class="login-bg">
-    <div class="login-card">
-      <h1 class="login-title">Inscription</h1>
+  <div class="login-bg" style="background: linear-gradient(135deg, #1e5d2d 0%, #3bb54a 100%), url('/MyStadium/public/img/signupbackground.jpg') center/cover no-repeat; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <div class="card" style="max-width: 420px; width: 100%; margin: 48px 0; text-align: center; background: rgba(255,255,255,0.97);">
+      <h1 class="login-title" style="font-size:2em; color:#1e5d2d; font-family:'Ms Madi',cursive; margin-bottom: 18px;">Inscription</h1>
       <?php
       session_start();
-      if (isset($_GET['msg'])) {
-        $type = isset($_GET['type']) && $_GET['type'] === 'success' ? 'alert-success' : 'alert-error';
-        echo '<div class="alert ' . $type . '">' . htmlspecialchars($_GET['msg']) . '</div>';
+      if (function_exists('get_flash')) {
+        $flash = get_flash();
+        if ($flash) {
+          $type = $flash['type'] === 'success' ? 'alert-success' : 'alert-error';
+          echo '<div class="alert ' . $type . '">' . htmlspecialchars($flash['msg']) . '</div>';
+        }
       }
       ?>
-      <form method="POST" action="/MyStadium/controller/inscription.php" class="login-form">
-        <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars(isset($_SESSION['csrf_token'])?$_SESSION['csrf_token']:''); ?>">
+      <form id="register-form" class="login-form" onsubmit="event.preventDefault(); register();">
         <div class="form-group">
-          <input type="text" name="lastname" placeholder="Nom" class="input-field" required />
+          <input type="text" id="reg-lastname" placeholder="Nom" class="input-field" required autocomplete="family-name" />
         </div>
         <div class="form-group">
-          <input type="text" name="firstname" placeholder="Prénom" class="input-field" required />
+          <input type="text" id="reg-firstname" placeholder="Prénom" class="input-field" required autocomplete="given-name" />
         </div>
         <div class="form-group">
-          <input type="email" name="email" placeholder="Email" class="input-field" required />
+          <input type="email" id="reg-email" placeholder="Email" class="input-field" required autocomplete="email" />
         </div>
         <div class="form-group">
-          <input type="text" name="telephone" placeholder="Téléphone" class="input-field" required />
+          <input type="text" id="reg-telephone" placeholder="Téléphone" class="input-field" required autocomplete="tel" />
         </div>
         <div class="form-group">
-          <input type="text" name="login" placeholder="Identifiant" class="input-field" required />
+          <input type="text" id="reg-login" placeholder="Identifiant" class="input-field" required autocomplete="username" />
         </div>
-        <div class="form-group">
-          <input type="password" name="password" placeholder="Mot de passe" class="input-field" required />
+        <div class="form-group" style="position:relative;">
+          <input type="password" id="reg-password" placeholder="Mot de passe" class="input-field" required autocomplete="new-password" />
+          <button type="button" onclick="togglePassword('reg-password', this)" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:#1e5d2d; font-size:1.2em;">
+            <i class="fa fa-eye" id="reg-password-eye"></i>
+          </button>
+        </div>
+        <script>
+        function togglePassword(inputId, btn) {
+          const input = document.getElementById(inputId);
+          const eye = btn.querySelector('i');
+          if (input.type === 'password') {
+            input.type = 'text';
+            eye.classList.remove('fa-eye');
+            eye.classList.add('fa-eye-slash');
+          } else {
+            input.type = 'password';
+            eye.classList.remove('fa-eye-slash');
+            eye.classList.add('fa-eye');
+          }
+        }
+        </script>
+        <button type="submit" class="btn-main">S'inscrire</button>
+      </form>
+      <div id="register-feedback"></div>
+      <script>
+      async function register() {
+        const data = {
+          lastname: document.getElementById('reg-lastname').value,
+          firstname: document.getElementById('reg-firstname').value,
+          email: document.getElementById('reg-email').value,
+          telephone: document.getElementById('reg-telephone').value,
+          login: document.getElementById('reg-login').value,
+          password: document.getElementById('reg-password').value
+        };
+        const res = await fetch('/MyStadium/api/register.php', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify(data)
+        });
+        const result = await res.json();
+        const feedback = document.getElementById('register-feedback');
+        if(result.success) {
+          feedback.innerHTML = '<div class="alert alert-success">Inscription réussie ! Vous pouvez vous connecter.</div>';
+          setTimeout(()=>window.location.href='/MyStadium/views/connexion.php', 1200);
+        } else {
+          feedback.innerHTML = '<div class="alert alert-error">'+result.message+'</div>';
+        }
+      }
+      </script>
         </div>
         <button type="submit" class="btn-main">Valider</button>
       </form>

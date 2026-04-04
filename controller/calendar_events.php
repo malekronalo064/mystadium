@@ -7,7 +7,9 @@ for ($i = 0; $i < 21; $i++) {
     $d = date('Y-m-d', strtotime("+$i day"));
     $dates[$d] = false;
 }
-$stmt = $pdo->query("SELECT res_date FROM reservation WHERE res_date >= '$today'");
+// Use a prepared statement for safety and compatibility
+$stmt = $pdo->prepare("SELECT res_date FROM reservation WHERE res_date >= ?");
+$stmt->execute([$today]);
 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $dates[$row['res_date']] = true;
 }

@@ -1,51 +1,49 @@
-.alert-success {
-  background: #eaffea;
-  color: #1e5d2d;
-  border: 1px solid #3bb54a;
+/* Spécifique à la page de réservation */
+.login-bg {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
 }
-
-/* Styles uniformisés pour formulaires, boutons, alertes */
+.card {
+  background: rgba(255,255,255,0.97);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px rgba(30,93,45,0.18);
+  padding: 48px 36px 36px 36px;
+  max-width: 440px;
+  width: 100%;
+  margin: 36px auto;
+  transition: box-shadow 0.2s, transform 0.2s;
+  border: 1.5px solid #e0f2e9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-title {
+  color: #1e5d2d;
+  font-size: 2em;
+  margin-bottom: 18px;
+  font-family: 'Ms Madi', cursive;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
 .form-group {
   margin-bottom: 18px;
+  width: 100%;
+  text-align: left;
 }
 .input-field {
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #b2d8b2;
-  border-radius: 6px;
-  font-size: 1rem;
+  border: 1.5px solid #e0f2e9;
+  border-radius: 8px;
+  font-size: 1.08em;
   background: #f8fff8;
-  transition: border 0.2s;
+  transition: border 0.2s, box-shadow 0.2s;
 }
 .input-field:focus {
   border: 1.5px solid #3bb54a;
   outline: none;
-}
-.btn-main {
-  width: 100%;
-  padding: 12px 0;
-  background: linear-gradient(90deg, #1e5d2d 0%, #3bb54a 100%);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(30,93,45,0.08);
-  transition: background 0.2s;
-}
-.btn-main:hover {
-  background: linear-gradient(90deg, #3bb54a 0%, #1e5d2d 100%);
-}
-.alert {
-  width: 100%;
-  padding: 10px 14px;
-  border-radius: 5px;
-  margin-bottom: 18px;
-  font-size: 0.98rem;
-}
-.alert-error {
-  background: #ffeaea;
-  color: #b30000;
-  border: 1px solid #ffb3b3;
+  box-shadow: 0 0 0 2px #3bb54a33;
 }

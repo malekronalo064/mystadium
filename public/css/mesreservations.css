@@ -1,27 +1,35 @@
 
-*{
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+/* Spécifique à la page Mes Réservations */
+body {
+  background: none;
 }
 table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-
-
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-    color: #fff;
-
-  }
-  
-  tr:nth-child(even) {
-    background-color: rgb(77, 68, 68);
-  }
+  font-family: 'Montserrat', 'Segoe UI', Arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  background: rgba(255,255,255,0.97);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px #1e5d2d22;
+  margin: 32px 0;
+  overflow: hidden;
+}
+th, td {
+  border: 1px solid #e0f2e9;
+  text-align: left;
+  padding: 12px 16px;
+  color: #1e5d2d;
+  font-size: 1.08em;
+}
+th {
+  background: #3bb54a;
+  color: #fff;
+  font-weight: 700;
+}
+tr:nth-child(even) {
+  background-color: #f8fff8;
+}
+tr:nth-child(odd) {
+  background-color: #e0f2e9;
+}
 
   

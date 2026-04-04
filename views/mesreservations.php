@@ -4,26 +4,18 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/MyStadium/public/css/index.css"/>
-    <link rel="stylesheet" href="/MyStadium/public/css/footer.css"/>
-    <link rel="stylesheet" href="/MyStadium/public/css/header.css"/>
     <link rel="stylesheet" href="/MyStadium/public/css/mesreservations.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" >
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 
     <title>MyStadium</title>
-    
+    <style>body { font-family: 'Roboto', 'Segoe UI', Arial, sans-serif; }</style>
 </head>
 
     <body>
-    <style>
-body {    
-    background-image: linear-gradient(rgba(0,0,0,0.60), rgba(0,0,0,0.60)),url('../public/img/signupbackground1.jpg');
-    background-size: cover;
-    background-position: center;  
-}  
-</style>
+    <!-- Style global géré par index.css -->
     
-    <?php include($_SERVER['DOCUMENT_ROOT'] . "/MyStadium/views/header.php"); ?>
+    <?php include(__DIR__ . "/header.php"); ?>
 
 
       <?php
@@ -52,7 +44,8 @@ if(isset($_SESSION['user'])){
     <th>Prix / €</th>
   </tr>
 
-  <?php foreach($result as $key => $val){?>
+  <?php if (!empty($result) && is_array($result)) {
+    foreach($result as $key => $val){?>
   <tr>
     <td><?php echo $val['res_name'] ?></td>
     <td><?php echo $val['res_date_debut'] ?></td>
@@ -62,7 +55,11 @@ if(isset($_SESSION['user'])){
 
   </tr>
 
-  <?php } 
+
+    <?php }
+  } else {
+    echo "<tr><td colspan='5' style='text-align:center;color:#c62828;'>Aucune réservation trouvée.</td></tr>";
+  }
   ?>
 
 </table>

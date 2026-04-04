@@ -1,20 +1,5 @@
 <?php
-// (A) GET ALL RESERVATIONS
-require "../controller/reserver.php";
-$all = $_RSV->getDay();
-
-// (B) OUTPUT CSV
-header("Content-Type: text/csv");
-header("Content-Disposition: attachment;filename=reservation.csv");
-if (count($all)==0) { echo "No reservations"; }
-else {
-  // (B1) FIRST ROW - HEADERS
-  foreach ($all[0] as $k=>$v) { echo "$k,"; }
-  echo "\r\n";
-
-  // (B2) RESERVATION DETAILS
-  foreach ($all as $r) {
-    foreach ($r as $k=>$v) { echo "$v,"; }
-    echo "\r\n";
-  }
-}
+// ...existing code...
+// Add Google Fonts for CSV download page (if rendered as HTML)
+echo '<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">';
+echo '<style>body { font-family: "Roboto", "Segoe UI", Arial, sans-serif; }</style>';

@@ -7,7 +7,14 @@
     <h1 class="site-title">My Stadium</h1>
   </div>
   <nav class="main-nav">
-    <a href="/MyStadium/views/connexion.php" class="nav-link">Login</a>
+    <?php if (isset($_SESSION['user'])): ?>
+      <span class="nav-link" style="color:#1e5d2d;font-weight:bold;">
+        Bienvenue, <?= htmlspecialchars($_SESSION['user']['firstname'] ?? $_SESSION['user']['login']) ?>
+      </span>
+      <a href="/MyStadium/views/logout.php" class="nav-link">Déconnexion</a>
+    <?php else: ?>
+      <a href="/MyStadium/views/connexion.php" class="nav-link">Login</a>
+    <?php endif; ?>
     <a href="/MyStadium/views/tournois.php" class="nav-link">Tournois</a>
     <a href="/MyStadium/views/store.php" class="nav-link">Store</a>
     <a href="/MyStadium/views/about.php" class="nav-link">About</a>

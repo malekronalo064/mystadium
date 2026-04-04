@@ -1,9 +1,34 @@
 <!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/MyStadium/public/css/index.css"/>
+	<title>Expérience — MyStadium</title>
+	<style>body{font-family:'Segoe UI','Roboto',Arial,sans-serif;}</style>
+</head>
+<body>
+	<?php include(__DIR__ . "/header.php")?>
+	<div class="login-bg">
+		<div class="login-card" style="max-width:700px;width:100%;">
+			<h1 class="login-title">Expérience utilisateur</h1>
+			<h2>Témoignages</h2>
+			<blockquote>“Super facile de réserver, équipe sympa, je recommande !” — Karim</blockquote>
+			<blockquote>“Le calendrier interactif est top, plus de galère pour trouver un créneau.” — Julie</blockquote>
+			<h2>FAQ</h2>
+			<ul>
+				<li><strong>Comment réserver ?</strong> Créez un compte, connectez-vous et choisissez votre créneau !</li>
+				<li><strong>Puis-je annuler ?</strong> Oui, depuis votre espace personnel.</li>
+				<li><strong>Quels moyens de paiement ?</strong> CB, PayPal, espèces sur place.</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
+<!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="/MyStadium/public/css/footer.css"/>
-	<link rel="stylesheet" href="/MyStadium/public/css/header.css"/>
 	<title>MyStadium - Expérience</title>
 </head>
 <body>
