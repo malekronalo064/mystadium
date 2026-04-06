@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . '/../bdd/helpers.php';
+start_secure_session();
 if (isset($_SESSION["user"])) {
     header('Location: ../views/monespace.php');
     exit;

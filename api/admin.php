@@ -1,7 +1,8 @@
 <?php
 // api/admin.php
 require_once __DIR__ . '/../bdd/config.php';
-session_start();
+require_once __DIR__ . '/../bdd/helpers.php';
+start_secure_session();
 header('Content-Type: application/json');
 if (!isset($_SESSION['user']) || ($_SESSION['user']['role'] ?? '') !== 'admin') {
   echo json_encode(['success'=>false,'message'=>'Accès refusé']);

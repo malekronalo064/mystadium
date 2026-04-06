@@ -14,7 +14,8 @@ if ($method === 'GET') {
   echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
 } elseif ($method === 'POST') {
   $data = json_decode(file_get_contents('php://input'), true);
-  session_start();
+  require_once __DIR__ . '/../bdd/helpers.php';
+  start_secure_session();
   if (!isset($_SESSION['user'])) { echo json_encode(['success'=>false,'message'=>'Non connecté']); exit; }
   $fields = ['terrain_id','res_date','res_slot'];
   foreach($fields as $f) if(empty($data[$f])) { echo json_encode(['success'=>false,'message'=>'Champs manquants']); exit; }
@@ -24,7 +25,8 @@ if ($method === 'GET') {
   ]);
   echo json_encode(['success'=>true]);
 } elseif ($method === 'DELETE') {
-  session_start();
+  require_once __DIR__ . '/../bdd/helpers.php';
+  start_secure_session();
   if (!isset($_SESSION['user'])) { echo json_encode(['success'=>false,'message'=>'Non connecté']); exit; }
   $data = json_decode(file_get_contents('php://input'), true);
   if (empty($data['id'])) { echo json_encode(['success'=>false,'message'=>'ID manquant']); exit; }

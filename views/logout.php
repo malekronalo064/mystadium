@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once __DIR__ . '/../bdd/helpers.php';
+start_secure_session();
 // Vide toutes les variables de session
 $_SESSION = array();
 // Supprime le cookie de session si besoin

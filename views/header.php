@@ -1,5 +1,6 @@
 <?php
-if (session_status() === PHP_SESSION_NONE) session_start();
+require_once __DIR__ . '/../bdd/helpers.php';
+start_secure_session();
 ?>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <header class="main-header" style="position:sticky;top:0;z-index:1000;background:#111;box-shadow:0 2px 12px #0002;min-height:48px;">
@@ -29,10 +30,17 @@ if (session_status() === PHP_SESSION_NONE) session_start();
         <i class="fa fa-bookmark" style="margin-bottom:2px;font-size:1.15em;color:#3bb54a;"></i>
         Réserver
       </a>
-      <a href="/MyStadium/views/logout.php" class="nav-link" style="color:#fff;font-family:'Montserrat',Arial,sans-serif;font-weight:900;font-size:0.98em;letter-spacing:1.2px;text-transform:uppercase;padding:0 6px;background:none;border:none;display:flex;flex-direction:column;align-items:center;">
-        <i class="fa fa-sign-out" style="margin-bottom:2px;font-size:1.15em;color:#3bb54a;"></i>
-        Déconnexion
-      </a>
+      <?php if (isset($_SESSION['user'])): ?>
+        <a href="/MyStadium/views/logout.php" class="nav-link" style="color:#fff;font-family:'Montserrat',Arial,sans-serif;font-weight:900;font-size:0.98em;letter-spacing:1.2px;text-transform:uppercase;padding:0 6px;background:none;border:none;display:flex;flex-direction:column;align-items:center;">
+          <i class="fa fa-sign-out" style="margin-bottom:2px;font-size:1.15em;color:#3bb54a;"></i>
+          Déconnexion
+        </a>
+      <?php else: ?>
+        <a href="/MyStadium/views/connexion.php" class="nav-link" style="color:#fff;font-family:'Montserrat',Arial,sans-serif;font-weight:900;font-size:0.98em;letter-spacing:1.2px;text-transform:uppercase;padding:0 6px;background:none;border:none;display:flex;flex-direction:column;align-items:center;">
+          <i class="fa fa-sign-in" style="margin-bottom:2px;font-size:1.15em;color:#3bb54a;"></i>
+          Connexion
+        </a>
+      <?php endif; ?>
     </nav>
     <button class="menu-toggle" aria-label="Ouvrir le menu" onclick="toggleMenu()" style="background:none;border:none;color:#fff;font-size:2em;display:none;">
       <i class="fa fa-bars"></i>

@@ -2,7 +2,8 @@
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
 error_reporting(0);
-session_start();
+require_once __DIR__ . '/../bdd/helpers.php';
+start_secure_session();
 if (isset($_SESSION["user"])) {
   header('Location: /MyStadium/index.php');
   exit;

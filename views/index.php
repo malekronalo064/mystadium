@@ -87,5 +87,6 @@
     </section>
   </div>
   <script src="/MyStadium/public/js/app.js"></script>
+  <?php include(__DIR__ . "/footer.php")?>
 </body>
 </html>

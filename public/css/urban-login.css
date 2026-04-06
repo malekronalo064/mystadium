@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900;700;400&display=swap');
+
+.urban-login-wrapper {
+  display: flex;
+  min-height: 100vh;
+  background: #000;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+.urban-login-left, .urban-login-right {
+  flex: 1 1 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.urban-login-left {
+  background: #000;
+  min-width: 380px;
+  max-width: 600px;
+  padding: 0 4vw;
+}
+.urban-login-form-card {
+  width: 100%;
+  max-width: 420px;
+  background: none;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.urban-login-title {
+  font-size: 2.8em;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  text-align: left;
+}
+.urban-login-form label {
+  font-size: 1.08em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  color: #fff;
+  display: block;
+}
+.urban-form-group {
+  margin-bottom: 24px;
+}
+.urban-input {
+  width: 100%;
+  padding: 16px 14px;
+  border: none;
+  border-radius: 0;
+  font-size: 1.15em;
+  background: #fff;
+  color: #111;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  margin-bottom: 0;
+  box-sizing: border-box;
+  outline: none;
+  border-bottom: 2px solid #fff;
+  transition: border 0.2s;
+}
+.urban-input:focus {
+  border-bottom: 2px solid #3bb54a;
+}
+.urban-eye-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #111;
+  font-size: 1.3em;
+  padding: 0;
+}
+.urban-btn-main {
+  width: 100%;
+  padding: 16px 0;
+  background: #3bb54a;
+  color: #fff;
+  border: 2px solid #3bb54a;
+  border-radius: 0;
+  font-size: 1.18em;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-top: 12px;
+  margin-bottom: 18px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+.urban-btn-main:hover {
+  background: #fff;
+  color: #3bb54a;
+}
+.urban-login-links {
+  text-align: left;
+  margin-top: 8px;
+}
+.urban-link-forgot {
+  color: #fff;
+  font-style: italic;
+  font-size: 1em;
+  text-decoration: underline;
+  transition: color 0.18s;
+}
+.urban-link-forgot:hover {
+  color: #3bb54a;
+}
+.urban-login-right {
+  background: #111 url('/MyStadium/public/img/signupbackground1.jpg') center/cover no-repeat;
+  min-width: 380px;
+  position: relative;
+  justify-content: flex-start;
+}
+.urban-login-cta {
+  background: rgba(0,0,0,0.72);
+  border: 1.5px solid #3bb54a;
+  border-radius: 0;
+  padding: 48px 36px 36px 36px;
+  max-width: 420px;
+  margin: 0 0 0 8vw;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 8px 32px #0008;
+}
+.urban-login-brand {
+  font-size: 3em;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  text-align: center;
+}
+.urban-orange {
+  color: #3bb54a;
+}
+.urban-login-subtitle {
+  font-size: 1.35em;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  text-align: center;
+}
+.urban-btn-outline {
+  display: inline-block;
+  padding: 14px 32px;
+  border: 2px solid #3bb54a;
+  background: none;
+  color: #3bb54a;
+  font-size: 1.1em;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  text-decoration: none;
+}
+.urban-btn-outline:hover {
+  background: #3bb54a;
+  color: #fff;
+}
+.alert {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 5px;
+  margin-bottom: 18px;
+  font-size: 1.05em;
+  background: #ffeaea;
+  color: #b30000;
+  border: 1.5px solid #3bb54a;
+}
+.alert-success {
+  background: #e8f5e9;
+  color: #1e5d2d;
+  border: 1.5px solid #3bb54a;
+}
+@media (max-width: 1100px) {
+  .urban-login-wrapper { flex-direction: column; }
+  .urban-login-left, .urban-login-right { min-width: 0; max-width: 100vw; }
+  .urban-login-cta { margin: 32px auto; }
+}
+@media (max-width: 700px) {
+  .urban-login-wrapper { flex-direction: column; }
+  .urban-login-left, .urban-login-right { min-width: 0; max-width: 100vw; padding: 0 2vw; }
+  .urban-login-cta { padding: 32px 8px; margin: 24px auto; }
+  .urban-login-title, .urban-login-brand { font-size: 1.5em; }
+}

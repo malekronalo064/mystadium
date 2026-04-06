@@ -12,7 +12,8 @@ $stmt = $pdo->prepare('SELECT * FROM users WHERE login = :login');
 $stmt->execute([':login'=>$login]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 if ($user && password_verify($password, $user['password'])) {
-  session_start();
+  require_once __DIR__ . '/../bdd/helpers.php';
+  start_secure_session();
   unset($user['password']);
   $_SESSION['user'] = $user;
   echo json_encode(['success'=>true,'user'=>$user]);

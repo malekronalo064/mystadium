@@ -1,6 +1,7 @@
 <?php
 // views/admin.php
-session_start();
+require_once __DIR__ . '/../bdd/helpers.php';
+start_secure_session();
 if (!isset($_SESSION['user']) || ($_SESSION['user']['role'] ?? '') !== 'admin') {
   unset($_SESSION['user']);
   session_destroy();
