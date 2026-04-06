@@ -1,4 +1,159 @@
-/* Alertes stylisées */
+/* --- UrbanSoccer-inspired details: hover, shadow, transitions, sticky, premium footer, etc. --- */
+.card {
+  transition: box-shadow 0.25s, transform 0.18s;
+}
+.card:hover {
+  box-shadow: 0 12px 36px #1e5d2d44;
+  transform: translateY(-4px) scale(1.012);
+}
+
+.btn-main {
+  box-shadow: 0 2px 8px #1e5d2d22;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.18s;
+}
+.btn-main:active {
+  transform: scale(0.97);
+  box-shadow: 0 1px 4px #3bb54a33;
+}
+
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px #0002;
+  background: #111;
+  backdrop-filter: none;
+}
+
+.main-footer {
+  background: #1e5d2d;
+  color: #fff;
+  padding: 36px 0 18px 0;
+  text-align: center;
+  font-size: 1.1em;
+  margin-top: 48px;
+  border-top: 4px solid #3bb54a;
+  box-shadow: 0 -2px 12px #1e5d2d22;
+}
+.main-footer a {
+  color: #3bb54a;
+  text-decoration: underline;
+  margin: 0 8px;
+  font-weight: 600;
+  transition: color 0.18s;
+}
+.main-footer a:hover {
+  color: #fff;
+}
+
+/* Typo accent UrbanSoccer */
+h1, .login-title {
+  font-family: 'Ms Madi', cursive;
+  font-size: 2.2em;
+  color: #1e5d2d;
+  margin-bottom: 18px;
+}
+h2 {
+  font-family: 'Montserrat', Arial, sans-serif;
+  color: #3bb54a;
+  font-size: 1.3em;
+  margin-bottom: 12px;
+}
+
+/* Responsive menu */
+@media (max-width: 900px) {
+  .main-header {
+    flex-direction: column;
+    padding: 12px 8px;
+  }
+  .main-header a {
+    margin: 8px 0;
+  }
+}
+
+@media (max-width: 700px) {
+  .main-header, .main-footer, .card {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .card {
+    padding: 18px 8px;
+  }
+  h1, .login-title {
+    font-size: 1.4em;
+  }
+}
+/* UrbanSoccer-inspired premium CSS (green palette, modern, immersive) */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap');
+
+body {
+  background: linear-gradient(135deg, #1e5d2d 0%, #3bb54a 100%);
+  color: #222;
+  font-family: 'Montserrat', 'Segoe UI', 'Roboto', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-attachment: fixed;
+  box-sizing: border-box;
+}
+
+/* Header */
+.main-header {
+  background: rgba(30,93,45,0.98);
+  color: #fff;
+  padding: 22px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 12px #1e5d2d22;
+}
+.main-header a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  margin: 0 18px;
+  letter-spacing: 1px;
+  font-size: 1.1em;
+  transition: color 0.2s, background 0.2s;
+}
+.main-header a:hover {
+  color: #3bb54a;
+}
+
+/* Buttons */
+.btn-main {
+  background: #fff;
+  color: #1e5d2d;
+  border: 2px solid #3bb54a;
+  border-radius: 4px;
+  padding: 12px 32px;
+  font-size: 1.1em;
+  font-weight: 900;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #3bb54a22;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.btn-main:hover {
+  background: #3bb54a;
+  color: #fff;
+  box-shadow: 0 4px 16px #3bb54a33;
+}
+
+/* Cards */
+.card {
+  background: #181818;
+  color: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px #0004;
+  padding: 32px 28px;
+  margin: 24px 0;
+}
+
+/* Alerts */
 .alert {
   padding: 18px 24px;
   border-radius: 10px;
@@ -15,9 +170,9 @@
   border: 1.5px solid #3bb54a;
 }
 .alert-warning {
-  background: linear-gradient(90deg, #fffbe6 0%, #ffe082 100%);
-  color: #b26a00;
-  border: 1.5px solid #ffe082;
+  background: linear-gradient(90deg, #eaffea 0%, #d0f5d8 100%);
+  color: #1e5d2d;
+  border: 1.5px solid #3bb54a;
 }
 .alert-error {
   background: linear-gradient(90deg, #ffebee 0%, #ffcdd2 100%);
@@ -25,34 +180,68 @@
   border: 1.5px solid #ffcdd2;
 }
 
-
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ms+Madi&display=swap');
-
-body {
-  background: linear-gradient(135deg, #1e5d2d 0%, #3bb54a 100%);
-  color: #222;
-  font-family: 'Montserrat', 'Segoe UI', 'Roboto', Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  min-height: 100vh;
-  background-attachment: fixed;
+/* Inputs & Forms */
+.input-field {
+  border-radius: 12px;
+  border: 1.5px solid #3bb54a;
+  padding: 12px 16px;
+  font-size: 1em;
+  margin-bottom: 14px;
+  width: 100%;
   box-sizing: border-box;
+  transition: border 0.2s;
+}
+.input-field:focus {
+  border: 1.5px solid #1e5d2d;
+  outline: none;
 }
 
-.main-header {
-  background: rgba(30,93,45,0.98);
+/* Footer */
+.main-footer {
+  background: #1e5d2d;
   color: #fff;
-  padding: 22px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 4px 24px rgba(30,93,45,0.10);
-  border-bottom-left-radius: 18px;
-  border-bottom-right-radius: 18px;
+  padding: 36px 0 18px 0;
+  text-align: center;
+  font-size: 1.1em;
+  margin-top: 48px;
+}
+.main-footer a {
+  color: #3bb54a;
+  text-decoration: underline;
+  margin: 0 8px;
+}
+.main-footer a:hover {
+  color: #fff;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 18px;
+}
+th, td {
+  border: 1px solid #e0e0e0;
+  padding: 12px 10px;
+  text-align: left;
+}
+th {
+  background: #3bb54a;
+  color: #fff;
+}
+tr:nth-child(even) {
+  background: #f5f5f5;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .main-header, .main-footer, .card {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .card {
+    padding: 18px 8px;
+  }
 }
 
 .logo-img {
@@ -265,9 +454,10 @@ header.header{
 
 
 
+
 .buttonsMain a {
   border-radius: 10px;
-  background: linear-gradient(90deg, #f4511e 0%, #ff9800 100%);
+  background: linear-gradient(90deg, #1e5d2d 0%, #3bb54a 100%);
   border: none;
   color: #fff;
   text-align: center;
@@ -278,14 +468,14 @@ header.header{
   cursor: pointer;
   margin: 8px;
   font-weight: 700;
-  box-shadow: 0 2px 8px #f4511e33;
+  box-shadow: 0 2px 8px #1e5d2d33;
   letter-spacing: 0.5px;
   display: inline-block;
 }
 .buttonsMain a:hover {
-  background: linear-gradient(90deg, #ff9800 0%, #f4511e 100%);
+  background: linear-gradient(90deg, #3bb54a 0%, #1e5d2d 100%);
   color: #fff;
-  box-shadow: 0 4px 16px #f4511e44;
+  box-shadow: 0 4px 16px #3bb54a44;
   transform: translateY(-2px) scale(1.04);
 }
 

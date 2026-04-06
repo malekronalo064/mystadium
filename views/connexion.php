@@ -19,9 +19,9 @@ if (isset($_SESSION["user"])) {
 </head>
 <body>
 <?php include(__DIR__ . "/header.php")?>
-<div class="login-bg" style="background: linear-gradient(135deg, #1e5d2d 0%, #3bb54a 100%), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-  <section class="card" style="max-width: 420px; width: 100%; margin: 48px 0; text-align: center; background: rgba(255,255,255,0.97); box-shadow:0 8px 32px #1e5d2d22;">
-    <h1 class="login-title" style="font-size:2.2em; color:#1e5d2d; font-family:'Ms Madi',cursive; margin-bottom: 18px;">Connexion</h1>
+<div class="login-bg" style="background: #111 url('/MyStadium/public/img/loginposter.jpg') center/cover no-repeat; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+  <section class="card" style="max-width: 420px; width: 100%; margin: 48px 0; text-align: center; background: #181818; color: #fff; box-shadow:0 8px 32px #0004; border-radius:18px;">
+    <h1 class="login-title" style="font-size:2.2em; color:#3bb54a; font-family:'Montserrat',Arial,sans-serif; font-weight:900; text-transform:uppercase; margin-bottom: 18px;">Connexion</h1>
     <?php
     if (isset($_SESSION["user"])) {
       echo '<div class="alert alert-info" style="background: #e3f2fd; color: #1565c0; border: 1.5px solid #90caf9; padding: 12px 18px; border-radius: 8px; margin-bottom: 16px;">Vous êtes déjà connecté. <a href="/MyStadium/views/logout.php" style="color:#1565c0;text-decoration:underline;">Déconnexion</a></div>';

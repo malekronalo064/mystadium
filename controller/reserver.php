@@ -1,18 +1,9 @@
 <?php
+// Contrôleur minimal : session + vue, toute la logique métier passe par l'API (AJAX)
 session_start();
 if (!isset($_SESSION["user"])) {
     header('Location: ../views/connexion.php');
     exit;
 }
-// Toute la logique métier passe désormais par l'API (réservation via AJAX)
+// Affichage de la page de réservation (style UrbanSoccer)
 include __DIR__ . '/../views/reserver.php';
-    $this->stmt = $pdo->prepare(
-      "SELECT * FROM reservation WHERE res_date=?"
-    );
-    $this->stmt->execute([$day]);
-    return $this->stmt->fetchAll();
-  }
-}
-
-// (F) NEW RESERVATION OBJECT
-$_RSV = new Reservation();

@@ -9,7 +9,7 @@
 </head>
 <body>
 <?php include(__DIR__ . "/header.php")?>
-<div class="login-bg" style="background: linear-gradient(135deg, #1e5d2d 0%, #3bb54a 100%); min-height: 100vh; display: flex; flex-direction: column; align-items: center;">
+<div class="login-bg" style="background: #111 url('/MyStadium/public/img/aboutback.jpg') center/cover no-repeat; min-height: 100vh; display: flex; flex-direction: column; align-items: center;">
 	<section class="card" style="max-width: 700px; width: 100%; margin: 48px 0; text-align: center; background: rgba(255,255,255,0.97); box-shadow:0 8px 32px #1e5d2d22;">
 		<h1 class="login-title" style="font-size:2.2em; color:#1e5d2d; font-family:'Ms Madi',cursive; margin-bottom: 18px;">Rapport</h1>
 		<p style="font-size:1.1em;">Téléchargez vos rapports d'activité ou d'utilisation au format CSV pour analyse.</p>

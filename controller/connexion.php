@@ -30,5 +30,4 @@ include __DIR__ . '/../views/connexion.php';
         header('Location: /MyStadium/views/connexion.php');
         exit;
     }
-}
 ?>
