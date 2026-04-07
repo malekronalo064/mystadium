@@ -31,4 +31,7 @@
     <a href="#" style="color:#aaa;margin:0 12px;text-decoration:none;">Politique cookies</a>
   </div>
   <div style="text-align:center;margin:18px 0 0 0;font-family:'Montserrat',Arial,sans-serif;font-size:1.2em;color:#fff;letter-spacing:2px;">DBM.</div>
-</footer>
+  </footer>
+  <!-- Vue 3 & Element Plus CDN (footer fallback for late scripts) -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <script src="https://unpkg.com/element-plus"></script>

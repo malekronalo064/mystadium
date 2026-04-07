@@ -15,99 +15,119 @@ if (isset($_SESSION["user"])) {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="/MyStadium/public/css/index.css"/>
+  <link rel="stylesheet" href="/MyStadium/public/css/inscription-modern.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <title>Inscription — MyStadium</title>
 </head>
 <body>
 <?php include(__DIR__ . "/header.php")?>
-<div class="login-bg" style="background: #111 url('/MyStadium/public/img/signupbackground.jpg') center/cover no-repeat; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-  <section class="card" style="max-width: 440px; width: 100%; margin: 48px 0; text-align: center; background: #181818; color: #fff; box-shadow:0 8px 32px #0004; border-radius:18px;">
-    <h1 class="login-title" style="font-size:2.2em; color:#3bb54a; font-family:'Montserrat',Arial,sans-serif; font-weight:900; text-transform:uppercase; margin-bottom: 18px;">Inscription</h1>
-    <?php
-    if (function_exists('get_flash')) {
-      $flash = get_flash();
-      if ($flash) {
-        $type = $flash['type'] === 'success' ? 'alert-success' : 'alert-error';
-        echo '<div class="alert ' . $type . '">' . htmlspecialchars($flash['msg']) . '</div>';
-      }
-    }
-    ?>
-    <form id="register-form" class="login-form" onsubmit="event.preventDefault(); register();">
-      <div class="form-group">
-        <input type="text" id="reg-lastname" placeholder="Nom" class="input-field" required autocomplete="family-name" />
-      </div>
-      <div class="form-group">
-        <input type="text" id="reg-firstname" placeholder="Prénom" class="input-field" required autocomplete="given-name" />
-      </div>
-      <div class="form-group">
-        <input type="email" id="reg-email" placeholder="Email" class="input-field" required autocomplete="email" />
-      </div>
-      <div class="form-group">
-        <input type="text" id="reg-telephone" placeholder="Téléphone" class="input-field" required autocomplete="tel" />
-      </div>
-      <div class="form-group">
-        <input type="text" id="reg-login" placeholder="Identifiant" class="input-field" required autocomplete="username" />
-      </div>
-      <div class="form-group" style="position:relative;">
-        <input type="password" id="reg-password" placeholder="Mot de passe" class="input-field" required autocomplete="new-password" />
-        <button type="button" onclick="togglePassword('reg-password', this)" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:#1e5d2d; font-size:1.2em;">
-          <i class="fa fa-eye" id="reg-password-eye"></i>
-        </button>
-      </div>
-      <button type="submit" class="btn-main">S'inscrire</button>
-    </form>
-    <div id="register-feedback"></div>
-    <script>
-    function togglePassword(inputId, btn) {
-      const input = document.getElementById(inputId);
-      const eye = btn.querySelector('i');
-      if (input.type === 'password') {
-        input.type = 'text';
-        eye.classList.remove('fa-eye');
-        eye.classList.add('fa-eye-slash');
-      } else {
-        input.type = 'password';
-        eye.classList.remove('fa-eye-slash');
-        eye.classList.add('fa-eye');
-      }
-    }
-    async function register() {
-      const data = {
-        lastname: document.getElementById('reg-lastname').value,
-        firstname: document.getElementById('reg-firstname').value,
-        email: document.getElementById('reg-email').value,
-        telephone: document.getElementById('reg-telephone').value,
-        login: document.getElementById('reg-login').value,
-        password: document.getElementById('reg-password').value
-      };
-      const res = await fetch('/MyStadium/api/register.php', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
-      });
-      const result = await res.json();
-      const feedback = document.getElementById('register-feedback');
-      if(result.success) {
-        feedback.innerHTML = '<div class="alert alert-success">Inscription réussie ! Vous pouvez vous connecter.</div>';
-        setTimeout(()=>window.location.href='/MyStadium/views/connexion.php', 1200);
-      } else {
-        feedback.innerHTML = '<div class="alert alert-error">'+result.message+'</div>';
-      }
-    }
-    </script>
-  </section>
-</div>
-<?php include(__DIR__ . "/footer.php")?>
-</body>
-</html>
-        }
-      }
-      </script>
+<div class="insc-wrapper">
+  <div class="insc-left">
+    <img src="/MyStadium/public/img/signupbackground1.jpg" alt="Visuel inscription" class="insc-img" />
+    <div class="insc-caption">Rejoignez MyStadium et vivez l'expérience football premium.<br>Créez votre compte en quelques secondes !</div>
+  </div>
+  <div class="insc-right">
+    <div class="insc-title">Créer un compte</div>
+    <div class="insc-subtitle">Déjà inscrit ? <a href="connexion.php" style="color:#3bb54a;text-decoration:underline;">Se connecter</a></div>
+    <form id="register-form" class="insc-form" autocomplete="off" onsubmit="event.preventDefault(); register();">
+      <div class="insc-form-row">
+        <div class="field-group" style="flex:1;">
+          <label for="reg-firstname">Prénom</label>
+          <input type="text" id="reg-firstname" required autocomplete="given-name" />
+          <div class="field-error" id="err-reg-firstname"></div>
         </div>
-        <button type="submit" class="btn-main">Valider</button>
-      </form>
-      <div class="register-link">
-        <span>Déjà inscrit ?</span>
+        <div class="field-group" style="flex:1;">
+          <label for="reg-lastname">Nom</label>
+          <input type="text" id="reg-lastname" required autocomplete="family-name" />
+          <div class="field-error" id="err-reg-lastname"></div>
+        </div>
+      </div>
+      <div class="field-group">
+        <label for="reg-email">Email</label>
+        <input type="email" id="reg-email" required autocomplete="email" />
+        <div class="field-error" id="err-reg-email"></div>
+      </div>
+      <div class="field-group">
+        <label for="reg-telephone">Téléphone</label>
+        <input type="text" id="reg-telephone" required autocomplete="tel" />
+        <div class="field-error" id="err-reg-telephone"></div>
+      </div>
+      <div class="field-group">
+        <label for="reg-login">Identifiant</label>
+        <input type="text" id="reg-login" required autocomplete="username" />
+        <div class="field-error" id="err-reg-login"></div>
+      </div>
+      <div class="field-group">
+        <label for="reg-password">Mot de passe</label>
+        <input type="password" id="reg-password" required autocomplete="new-password" />
+        <button type="button" class="insc-eye-btn" tabindex="-1" onclick="togglePassword('reg-password', this)"><i class="fa fa-eye"></i></button>
+        <div class="field-error" id="err-reg-password"></div>
+      </div>
+      <button type="submit" class="insc-btn-main">Créer mon compte</button>
+      <div id="register-feedback"></div>
+      <div style="margin-top:10px;color:#bbb;font-size:0.93em;">Le mot de passe doit contenir au moins 10 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial.</div>
+    </form>
+  </div>
+</div>
+<script>
+function togglePassword(inputId, btn) {
+  const input = document.getElementById(inputId);
+  const eye = btn.querySelector('i');
+  if (input.type === 'password') {
+    input.type = 'text';
+    eye.classList.remove('fa-eye');
+    eye.classList.add('fa-eye-slash');
+  } else {
+    input.type = 'password';
+    eye.classList.remove('fa-eye-slash');
+    eye.classList.add('fa-eye');
+  }
+}
+async function register() {
+  // Reset erreurs
+  ['reg-firstname','reg-lastname','reg-email','reg-telephone','reg-login','reg-password'].forEach(id => {
+    document.getElementById(id).classList.remove('error');
+    document.getElementById('err-'+id).textContent = '';
+  });
+  const firstname = document.getElementById('reg-firstname').value.trim();
+  const lastname = document.getElementById('reg-lastname').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const telephone = document.getElementById('reg-telephone').value.trim();
+  const login = document.getElementById('reg-login').value.trim();
+  const password = document.getElementById('reg-password').value;
+  let hasError = false;
+  if (!firstname) { document.getElementById('reg-firstname').classList.add('error'); document.getElementById('err-reg-firstname').textContent = 'Champ obligatoire.'; hasError = true; }
+  if (!lastname) { document.getElementById('reg-lastname').classList.add('error'); document.getElementById('err-reg-lastname').textContent = 'Champ obligatoire.'; hasError = true; }
+  if (!email || !/^\S+@\S+\.\S+$/.test(email)) { document.getElementById('reg-email').classList.add('error'); document.getElementById('err-reg-email').textContent = 'Email invalide.'; hasError = true; }
+  if (!telephone) { document.getElementById('reg-telephone').classList.add('error'); document.getElementById('err-reg-telephone').textContent = 'Champ obligatoire.'; hasError = true; }
+  if (!login) { document.getElementById('reg-login').classList.add('error'); document.getElementById('err-reg-login').textContent = 'Champ obligatoire.'; hasError = true; }
+  if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\w\d]).{10,}$/.test(password)) {
+    document.getElementById('reg-password').classList.add('error');
+    document.getElementById('err-reg-password').textContent = 'Mot de passe trop faible.';
+    hasError = true;
+  }
+  if (hasError) return;
+  const feedback = document.getElementById('register-feedback');
+  feedback.innerHTML = '';
+  try {
+    const res = await fetch('/MyStadium/api/register.php', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({firstname, lastname, email, telephone, login, password}),
+      credentials: 'same-origin'
+    });
+    const data = await res.json();
+    if (data.success) {
+      feedback.innerHTML = '<div class="insc-alert insc-alert-success">Inscription réussie ! Vous pouvez vous connecter.</div>';
+      document.getElementById('register-form').reset();
+    } else {
+      feedback.innerHTML = '<div class="insc-alert">'+data.message+'</div>';
+    }
+  } catch (err) {
+    feedback.innerHTML = '<div class="insc-alert">Erreur réseau.</div>';
+  }
+}
+// ...existing code...
         <a href="connexion.php">Connectez-vous ici</a>
       </div>
     </div>

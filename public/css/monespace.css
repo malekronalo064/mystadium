@@ -1,0 +1,157 @@
+@media (max-width: 900px) {
+  .monespace-main {
+    max-width: 98vw;
+    padding: 18px 2vw 18px 2vw;
+    margin: 24px auto 18px auto;
+  }
+  .monespace-title {
+    font-size: 1.2em;
+  }
+  .monespace-userinfo, .monespace-form {
+    padding: 12px 4vw;
+    font-size: 1em;
+  }
+}
+@media (max-width: 600px) {
+  .monespace-main {
+    padding: 8px 2vw 8px 2vw;
+  }
+  .monespace-title {
+    font-size: 1em;
+  }
+  .monespace-userinfo, .monespace-form {
+    padding: 8px 2vw;
+    font-size: 0.97em;
+  }
+  .btn-main {
+    font-size: 1em;
+    padding: 12px 0;
+  }
+}
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap');
+
+.monespace-main {
+  max-width: 520px;
+  margin: 48px auto 32px auto;
+  background: #181818ee;
+  border-radius: 22px;
+  box-shadow: 0 8px 32px #3bb54a33;
+  padding: 38px 32px 32px 32px;
+  color: #fff;
+  font-family: 'Montserrat', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.monespace-title {
+  font-size: 2.1em;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #3bb54a;
+  margin-bottom: 12px;
+  text-align: left;
+}
+.monespace-section-title {
+  font-size: 1.15em;
+  font-weight: 700;
+  color: #1e5d2d;
+  margin: 24px 0 10px 0;
+  text-align: left;
+}
+.monespace-userinfo {
+  background: #fff;
+  color: #222;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #3bb54a22;
+  border: 1.5px solid #e0f2e9;
+  padding: 18px 24px;
+  margin-bottom: 18px;
+  text-align: left;
+  font-size: 1.08em;
+}
+.monespace-userinfo strong {
+  color: #1e5d2d;
+  min-width: 90px;
+  display: inline-block;
+}
+.monespace-form {
+  background: #232323;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px #3bb54a22;
+  border: 1.5px solid #3bb54a;
+  color: #fff;
+  padding: 22px 18px 12px 18px;
+  margin-bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.monespace-form label {
+  font-weight: 700;
+  color: #3bb54a;
+  margin-bottom: 4px;
+  text-align: left;
+}
+.monespace-form input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  border: 1.5px solid #e0f2e9;
+  font-size: 1em;
+  background: #fff;
+  color: #222;
+  margin-bottom: 0;
+  box-sizing: border-box;
+  outline: none;
+  transition: border 0.2s;
+}
+.monespace-form input[type="password"].error {
+  border: 1.5px solid #c62828;
+  background: #ffeaea;
+}
+.monespace-form .pwd-eye-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #3bb54a;
+  font-size: 1.2em;
+  padding: 0;
+}
+.monespace-form .field-group {
+  position: relative;
+  margin-bottom: 18px;
+}
+.monespace-form .field-error {
+  color: #c62828;
+  font-size: 0.97em;
+  margin-top: 2px;
+  text-align: left;
+}
+.monespace-alert {
+  padding: 12px 18px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 1.08em;
+  font-weight: 700;
+  text-align: left;
+}
+.monespace-alert-success {
+  background: #e8f5e9;
+  color: #1e5d2d;
+  border: 1.5px solid #3bb54a;
+}
+.monespace-alert-error {
+  background: #ffeaea;
+  color: #b30000;
+  border: 1.5px solid #c62828;
+}
+@media (max-width: 700px) {
+  .monespace-main {
+    padding: 18px 4vw 18px 4vw;
+  }
+}
